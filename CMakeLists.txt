@@ -4,10 +4,10 @@ project(NanoTekSpice)
 
 set(SRCS
     src/main.cpp
-    src/components/AComponent.cpp)
-
-set(HEADERS
-    include/IComponent.hpp)
+    src/Components/AComponent.cpp
+    src/Components/Input/InputComponent.cpp
+    src/Components/True/TrueComponent.cpp
+    )
 
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -std=c++20")
 

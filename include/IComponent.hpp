@@ -30,7 +30,7 @@ namespace nts {
     };
 }
 
-static std::ostream &operator<<(std::ostream &stream,
+inline std::ostream &operator<<(std::ostream &stream,
                                 const nts::Tristate &state)
 {
     switch (state) {
