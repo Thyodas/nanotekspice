@@ -7,7 +7,7 @@
 
 #include "ClockComponent.hpp"
 
-nts::Tristate nts::ClockComponent::compute(std::size_t pin)
+nts::Tristate nts::ClockComponent::compute(__attribute__((unused)) std::size_t pin)
 {
     return _value;
 }
@@ -15,7 +15,7 @@ nts::Tristate nts::ClockComponent::compute(std::size_t pin)
 nts::ClockComponent::ClockComponent()
 : _value(Undefined)
 {
-    _validPins = {1};
+    _validPins = {Output};
 }
 
 void nts::ClockComponent::simulate(std::size_t tick)

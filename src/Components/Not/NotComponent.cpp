@@ -9,9 +9,9 @@
 
 nts::Tristate nts::NotComponent::compute(std::size_t pin)
 {
-    if (pin != 2)
+    if (pin != Output)
         return getLink(pin);
-    Tristate a = getLink(1);
+    Tristate a = getLink(Input);
     if (a == Undefined)
         return Undefined;
     return (Tristate)(!a);
@@ -19,5 +19,5 @@ nts::Tristate nts::NotComponent::compute(std::size_t pin)
 
 nts::NotComponent::NotComponent()
 {
-    _validPins = {1, 2};
+    _validPins = {Input, Output};
 }

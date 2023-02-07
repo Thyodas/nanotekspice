@@ -16,11 +16,7 @@ void nts::AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size
 {
     if (!isValidPin(pin))
         throw nts::Error("Invalid pin for this component.");
-    auto pair = std::make_pair(otherPin, &other);
-    if (_linkMap.find(pin) != _linkMap.end() && _linkMap.at(pin) == pair)
-        return;
-    _linkMap[pin] = pair;
-    other.setLink(otherPin, *this, pin);
+    _linkMap[pin] = std::make_pair(otherPin, &other);
 }
 
 nts::AComponent::AComponent()

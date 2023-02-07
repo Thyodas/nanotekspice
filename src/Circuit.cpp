@@ -7,9 +7,11 @@
 
 #include "Circuit.hpp"
 
+#include <utility>
+
 nts::Error::Error(std::string error)
+: _error(std::move(error))
 {
-    _error = error;
 }
 
 const char *nts::Error::what() const noexcept

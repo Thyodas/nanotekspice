@@ -12,6 +12,8 @@ set(SRCS
     src/Components/Clock/ClockComponent.cpp
     src/Components/And/AndComponent.cpp
     src/Components/Not/NotComponent.cpp
+    src/Components/Or/OrComponent.cpp
+    src/Components/Xor/XorComponent.cpp
     src/Circuit.cpp
     )
 

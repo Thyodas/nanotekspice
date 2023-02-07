@@ -12,6 +12,10 @@
 namespace nts {
     class ClockComponent : public AComponent {
         public:
+            enum IO {
+                Output = 1,
+            };
+
             ClockComponent();
 
             void simulate(std::size_t tick) override;

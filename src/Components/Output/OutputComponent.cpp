@@ -14,5 +14,5 @@ nts::Tristate nts::OutputComponent::compute(std::size_t pin)
 
 nts::OutputComponent::OutputComponent()
 {
-    _validPins = {1};
+    _validPins = {Input};
 }

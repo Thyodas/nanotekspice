@@ -12,6 +12,10 @@
 namespace nts {
     class NotComponent : public AComponent {
         public:
+            enum IO {
+                Input = 1,
+                Output = 2,
+            };
             NotComponent();
 
             Tristate compute(std::size_t pin) override;

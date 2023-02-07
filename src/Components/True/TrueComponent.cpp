@@ -7,12 +7,12 @@
 
 #include "TrueComponent.hpp"
 
-nts::Tristate nts::TrueComponent::compute(std::size_t pin)
+nts::Tristate nts::TrueComponent::compute(__attribute__((unused)) std::size_t pin)
 {
     return True;
 }
 
 nts::TrueComponent::TrueComponent()
 {
-    _validPins = {1};
+    _validPins = {Output};
 }

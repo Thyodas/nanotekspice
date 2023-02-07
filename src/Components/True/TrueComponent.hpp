@@ -12,6 +12,10 @@
 namespace nts {
     class TrueComponent : public AComponent {
         public:
+            enum IO {
+                Output = 1,
+            };
+
             TrueComponent();
 
             Tristate compute(std::size_t pin) override;
