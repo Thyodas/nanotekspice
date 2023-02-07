@@ -12,7 +12,7 @@
 namespace nts {
     class InputComponent : public AComponent {
         public:
-            enum IO {
+            enum Pin {
                 Output = 1,
             };
 

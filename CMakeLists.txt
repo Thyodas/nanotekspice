@@ -14,6 +14,8 @@ set(SRCS
     src/Components/Not/NotComponent.cpp
     src/Components/Or/OrComponent.cpp
     src/Components/Xor/XorComponent.cpp
+    src/Components/Nor/NorComponent.cpp
+    src/Components/4001/Chip4001Component.cpp
     src/Circuit.cpp
     )
 

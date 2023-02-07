@@ -12,7 +12,7 @@
 namespace nts {
     class NotComponent : public AComponent {
         public:
-            enum IO {
+            enum Pin {
                 Input = 1,
                 Output = 2,
             };
