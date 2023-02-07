@@ -2,22 +2,21 @@
 ** EPITECH PROJECT, 2023
 ** NanoTekSpice
 ** File description:
-** AndComponent.hpp
+** TrueComponent.hpp
 */
 
 #pragma once
 
-#include "../AComponent.hpp"
+#include "../../AComponent.hpp"
 
 namespace nts {
-    class AndComponent : public AComponent {
+    class TrueComponent : public AComponent {
         public:
             enum Pin {
-                InputA = 1,
-                InputB = 2,
-                Output = 3,
+                Output = 1,
             };
-            AndComponent();
+
+            TrueComponent();
 
             Tristate compute(std::size_t pin) override;
     };

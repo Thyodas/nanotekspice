@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include "../AComponent.hpp"
-#include "../Nor/NorComponent.hpp"
+#include "../../AComponent.hpp"
+#include "../../Elementary/Nor/NorComponent.hpp"
 
 namespace nts {
     class Chip4001Component : public AComponent {

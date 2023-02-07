@@ -5,17 +5,17 @@ project(NanoTekSpice)
 set(SRCS
     src/main.cpp
     src/Components/AComponent.cpp
-    src/Components/Input/InputComponent.cpp
-    src/Components/True/TrueComponent.cpp
-    src/Components/False/FalseComponent.cpp
-    src/Components/Output/OutputComponent.cpp
-    src/Components/Clock/ClockComponent.cpp
-    src/Components/And/AndComponent.cpp
-    src/Components/Not/NotComponent.cpp
-    src/Components/Or/OrComponent.cpp
-    src/Components/Xor/XorComponent.cpp
-    src/Components/Nor/NorComponent.cpp
-    src/Components/4001/Chip4001Component.cpp
+    src/Components/Special/Input/InputComponent.cpp
+    src/Components/Special/True/TrueComponent.cpp
+    src/Components/Special/False/FalseComponent.cpp
+    src/Components/Special/Output/OutputComponent.cpp
+    src/Components/Special/Clock/ClockComponent.cpp
+    src/Components/Elementary/And/AndComponent.cpp
+    src/Components/Elementary/Not/NotComponent.cpp
+    src/Components/Elementary/Or/OrComponent.cpp
+    src/Components/Elementary/Xor/XorComponent.cpp
+    src/Components/Elementary/Nor/NorComponent.cpp
+    src/Components/Gate/4001/Chip4001Component.cpp
     src/Circuit.cpp
     )
 

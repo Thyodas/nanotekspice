@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "../AComponent.hpp"
+#include "../../AComponent.hpp"
 #include "../Not/NotComponent.hpp"
 #include "../And/AndComponent.hpp"
 #include "../Or/OrComponent.hpp"

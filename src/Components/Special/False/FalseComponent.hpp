@@ -2,22 +2,20 @@
 ** EPITECH PROJECT, 2023
 ** NanoTekSpice
 ** File description:
-** OrComponent.hpp
+** FalseComponent.hpp
 */
 
 #pragma once
 
-#include "../AComponent.hpp"
+#include "../../AComponent.hpp"
 
 namespace nts {
-    class OrComponent : public AComponent {
+    class FalseComponent : public AComponent {
         public:
             enum Pin {
-                InputA = 1,
-                InputB = 2,
-                Output = 3,
+                Output = 1,
             };
-            OrComponent();
+            FalseComponent();
 
             Tristate compute(std::size_t pin) override;
     };
