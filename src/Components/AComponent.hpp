@@ -24,7 +24,7 @@ namespace nts {
             virtual void simulate(std::size_t tick) override;
             void setLink(std::size_t pin, IComponent &other,
                          std::size_t otherPin) override;
-
+            virtual void setValue(nts::Tristate value) override;
         protected:
             bool isValidPin(std::size_t pin) const;
             Tristate getLink(std::size_t pin) const;

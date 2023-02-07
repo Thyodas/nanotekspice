@@ -12,11 +12,6 @@ nts::Error::Error(std::string error)
     _error = error;
 }
 
-nts::Error::~Error()
-{
-    
-}
-
 const char *nts::Error::what() const noexcept
 {
     return _error.c_str();

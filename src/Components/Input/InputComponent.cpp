@@ -9,10 +9,16 @@
 
 nts::Tristate nts::InputComponent::compute(std::size_t pin)
 {
-    return getLink(pin);
+    return _value;
 }
 
 nts::InputComponent::InputComponent()
+: _value(Undefined)
 {
     _validPins = {1};
+}
+
+void nts::InputComponent::setValue(nts::Tristate value)
+{
+    _value = value;
 }

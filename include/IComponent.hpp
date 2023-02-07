@@ -27,6 +27,8 @@ namespace nts {
 
             virtual void setLink(std::size_t pin, nts::IComponent &other,
                                  std::size_t otherPin) = 0;
+
+            virtual void setValue(nts::Tristate value) = 0;
     };
 }
 

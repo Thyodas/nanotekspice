@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** NanoTekSpice
 ** File description:
-** InputComponent.hpp
+** NotComponent.hpp
 */
 
 #pragma once
@@ -10,14 +10,10 @@
 #include "../AComponent.hpp"
 
 namespace nts {
-    class InputComponent : public AComponent {
+    class NotComponent : public AComponent {
         public:
-            InputComponent();
-
-            void setValue(nts::Tristate value) override;
+            NotComponent();
 
             Tristate compute(std::size_t pin) override;
-        private:
-            Tristate _value;
     };
-}
+} // nts

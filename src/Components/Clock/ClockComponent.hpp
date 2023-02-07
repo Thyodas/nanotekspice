@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** NanoTekSpice
 ** File description:
-** InputComponent.hpp
+** ClockComponent.hpp
 */
 
 #pragma once
@@ -10,11 +10,11 @@
 #include "../AComponent.hpp"
 
 namespace nts {
-    class InputComponent : public AComponent {
+    class ClockComponent : public AComponent {
         public:
-            InputComponent();
+            ClockComponent();
 
-            void setValue(nts::Tristate value) override;
+            void simulate(std::size_t tick) override;
 
             Tristate compute(std::size_t pin) override;
         private:
