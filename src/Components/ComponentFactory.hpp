@@ -21,7 +21,7 @@ namespace nts {
             ~ComponentFactory();
 
             std::unique_ptr<IComponent> createComponent(const std::string
-                                                        &name);
+                                                        &type);
         private:
             void registerComponent(const std::string &name,
               const std::function<std::unique_ptr<IComponent>()> &constructor);

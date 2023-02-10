@@ -25,8 +25,10 @@ void nts::ClockComponent::simulate(std::size_t tick)
     switch (_value) {
         case True:
             _value = False;
+            break;
         case False:
             _value = True;
+            break;
         case Undefined:
             break;
     }

@@ -38,11 +38,11 @@
 nts::ComponentFactory::~ComponentFactory() = default;
 
 std::unique_ptr<nts::IComponent> nts::ComponentFactory::createComponent(
-    const std::string &name)
+    const std::string &type)
 {
-    if (_constructorMap.find(name) == _constructorMap.end())
-        throw nts::Error("Unknown component '" + name + "'.");
-    return _constructorMap.at(name)();
+    if (_constructorMap.find(type) == _constructorMap.end())
+        throw nts::Error("Unknown component '" + type + "'.");
+    return _constructorMap.at(type)();
 }
 
 void nts::ComponentFactory::registerComponent(const std::string &name,

@@ -23,3 +23,13 @@ B-OOP-400_nanotekspice.pdf
 B-OOP-400_nanotekspice_bootstrap.pdf
 B-OOP-400_nanotekspice/
 cmake-build-debug/
+
+CMakeCache.txt
+
+cmake_install.cmake
+
+CMakeFiles/
+
+Makefile
+
+nanotekspice
