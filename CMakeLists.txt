@@ -24,6 +24,7 @@ set(SRCS
     src/Components/Gate/4069/Chip4069Component.cpp
     src/Components/Advanced/HalfAdder/HalfAdderComponent.cpp
     src/Components/Advanced/Adder/AdderComponent.cpp
+    src/Components/Advanced/4008/Chip4008Component.cpp
     src/Components/ComponentFactory.cpp
     src/Circuit.cpp
     )

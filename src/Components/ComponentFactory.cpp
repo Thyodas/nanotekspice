@@ -33,6 +33,7 @@
 // All Advanced
 #include "Advanced/HalfAdder/HalfAdderComponent.hpp"
 #include "Advanced/Adder/AdderComponent.hpp"
+#include "Advanced/4008/Chip4008Component.hpp"
 
 nts::ComponentFactory::~ComponentFactory() = default;
 
@@ -115,5 +116,8 @@ nts::ComponentFactory::ComponentFactory()
     });
     registerComponent("adder", []() {
         return std::make_unique<AdderComponent>();
+    });
+    registerComponent("4008", []() {
+        return std::make_unique<Chip4008Component>();
     });
 }
