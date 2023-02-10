@@ -30,6 +30,9 @@
 #include "Gate/4071/Chip4071Component.hpp"
 #include "Gate/4081/Chip4081Component.hpp"
 
+// All Advanced
+#include "Advanced/HalfAdder/HalfAdderComponent.hpp"
+
 nts::ComponentFactory::~ComponentFactory() = default;
 
 std::unique_ptr<nts::IComponent> nts::ComponentFactory::createComponent(
@@ -103,5 +106,10 @@ nts::ComponentFactory::ComponentFactory()
     });
     registerComponent("4081", []() {
         return std::make_unique<Chip4081Component>();
+    });
+
+    // Advanced
+    registerComponent("halfadder", []() {
+        return std::make_unique<HalfAdderComponent>();
     });
 }
