@@ -19,8 +19,10 @@ set(SRCS
     src/Components/Gate/4001/Chip4001Component.cpp
     src/Components/Gate/4011/Chip4011Component.cpp
     src/Components/Gate/4030/Chip4030Component.cpp
+    src/Components/Gate/4071/Chip4071Component.cpp
     src/Components/Gate/4081/Chip4081Component.cpp
     src/Components/Gate/4069/Chip4069Component.cpp
+    src/Components/ComponentFactory.cpp
     src/Circuit.cpp
     )
 
