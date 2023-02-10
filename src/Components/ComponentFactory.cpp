@@ -32,6 +32,7 @@
 
 // All Advanced
 #include "Advanced/HalfAdder/HalfAdderComponent.hpp"
+#include "Advanced/Adder/AdderComponent.hpp"
 
 nts::ComponentFactory::~ComponentFactory() = default;
 
@@ -111,5 +112,8 @@ nts::ComponentFactory::ComponentFactory()
     // Advanced
     registerComponent("halfadder", []() {
         return std::make_unique<HalfAdderComponent>();
+    });
+    registerComponent("adder", []() {
+        return std::make_unique<AdderComponent>();
     });
 }
