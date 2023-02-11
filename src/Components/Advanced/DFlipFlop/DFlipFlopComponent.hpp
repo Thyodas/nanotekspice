@@ -25,7 +25,6 @@ namespace nts {
 
             DFlipFlopComponent();
 
-            void simulate(std::size_t tick) override;
             Tristate compute(std::size_t pin) override;
         private:
             nts::Nand3Component nand3GateA;

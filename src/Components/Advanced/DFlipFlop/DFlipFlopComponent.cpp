@@ -47,10 +47,3 @@ nts::DFlipFlopComponent::DFlipFlopComponent()
     this->setLink(OutQ, nand3GateOutA, Nand3Component::Output);
     this->setLink(OutNQ, nand3GateOutB, Nand3Component::Output);
 }
-
-void nts::DFlipFlopComponent::simulate(std::size_t tick)
-{
-    if (_linkMap.find(InClk) == _linkMap.end())
-        return;
-    _linkMap.at(InClk).second->simulate(tick);
-}
