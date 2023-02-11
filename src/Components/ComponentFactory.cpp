@@ -34,6 +34,7 @@
 #include "Advanced/HalfAdder/HalfAdderComponent.hpp"
 #include "Advanced/Adder/AdderComponent.hpp"
 #include "Advanced/4008/Chip4008Component.hpp"
+#include "Advanced/Logger/LoggerComponent.hpp"
 
 nts::ComponentFactory::~ComponentFactory() = default;
 
@@ -119,5 +120,8 @@ nts::ComponentFactory::ComponentFactory()
     });
     registerComponent("4008", []() {
         return std::make_unique<Chip4008Component>();
+    });
+    registerComponent("logger", []() {
+        return std::make_unique<LoggerComponent>();
     });
 }

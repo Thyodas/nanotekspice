@@ -13,12 +13,17 @@ nts::Tristate nts::InputComponent::compute(__attribute__((unused)) std::size_t p
 }
 
 nts::InputComponent::InputComponent()
-: _value(Undefined)
+: _value(Undefined), _newValue(Undefined)
 {
     _validPins = {Output};
 }
 
 void nts::InputComponent::setValue(nts::Tristate value)
 {
-    _value = value;
+    _newValue = value;
+}
+
+void nts::InputComponent::simulate(__attribute__((unused)) std::size_t tick)
+{
+    _value = _newValue;
 }
