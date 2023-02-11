@@ -10,15 +10,11 @@
 
 void nts::LoggerComponent::simulate(std::size_t tick)
 {
-    if (_linkMap.find(InClock) == _linkMap.end()) {
-        _file << "test1";
+    if (_linkMap.find(InClock) == _linkMap.end())
         return;
-    }
     _linkMap.at(InClock).second->simulate(tick);
-    if (getLink(InClock) != True || getLink(InInhibit) != False) {
-        _file << "test2";
+    if (getLink(InClock) != True || getLink(InInhibit) != False)
         return;
-    }
     int res = 0;
     res |= getLink(In1);
     res |= getLink(In2) << 1;

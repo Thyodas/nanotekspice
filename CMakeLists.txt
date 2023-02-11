@@ -27,6 +27,7 @@ set(SRCS
     src/Components/Advanced/Adder/AdderComponent.cpp
     src/Components/Advanced/4008/Chip4008Component.cpp
     src/Components/Advanced/Logger/LoggerComponent.cpp
+    src/Components/Advanced/DFlipFlop/DFlipFlopComponent.cpp
     src/Components/ComponentFactory.cpp
     src/Circuit.cpp
     )
