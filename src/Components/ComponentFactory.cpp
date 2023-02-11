@@ -20,6 +20,7 @@
 #include "Elementary/And/AndComponent.hpp"
 #include "Elementary/Xor/XorComponent.hpp"
 #include "Elementary/Nand/NandComponent.hpp"
+#include "Elementary/Nand3/Nand3Component.hpp"
 #include "Elementary/Nor/NorComponent.hpp"
 
 // All Gate
@@ -86,6 +87,9 @@ nts::ComponentFactory::ComponentFactory()
     });
     registerComponent("nand", []() {
         return std::make_unique<NandComponent>();
+    });
+    registerComponent("nand3", []() {
+        return std::make_unique<Nand3Component>();
     });
     registerComponent("nor", []() {
         return std::make_unique<NorComponent>();
