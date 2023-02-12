@@ -15,6 +15,7 @@
 #include <vector>
 #include <map>
 #include <sstream>
+#include <algorithm>
 
 bool nts::Circuit::_loop = false;
 
@@ -53,12 +54,18 @@ void nts::Circuit::addComponent(std::string type, std::string name, nts::Compone
         throw nts::Error("nts: Two components have the same name " + nameCleared);
     std::unique_ptr<nts::IComponent> newComponent = factory->createComponent(type);
     _components[nameCleared] = std::move(newComponent);
+    if (type == "input" || type == "clock")
+        _inputs.push_back(nameCleared);
+    if (type == "output")
+        _outputs.push_back(nameCleared);
+    std::sort(_inputs.begin(), _inputs.end());
+    std::sort(_outputs.begin(), _outputs.end());
 }
 
 void nts::Circuit::setLinks(std::string name1, std::size_t pin1, std::string name2, std::size_t pin2)
 {
     if (_components.find(name1) == _components.end() || _components.find(name2) == _components.end())
-        throw nts::Error("nts: Components not found");
+        throw nts::Error("nts: Component not found");
     nts::IComponent *component1 = _components[name1].get();
     nts::IComponent *component2 = _components[name2].get();
     component2->setLink(pin2, *component1, pin1);
@@ -79,30 +86,17 @@ void nts::Circuit::loop()
 
 void nts::Circuit::display()
 {
-    std::vector<std::string> inputs;
-    std::vector<std::string> outputs;
     std::cout << "tick: " << _ticks << std::endl;
-    for (const auto &it : _components) {
-        if (dynamic_cast<nts::InputComponent *>(it.second.get()))
-            inputs.push_back(it.first);
-        if (dynamic_cast<nts::ClockComponent *>(it.second.get()))
-            inputs.push_back(it.first);
-        if (dynamic_cast<nts::OutputComponent *>(it.second.get()))
-            outputs.push_back(it.first);
-    }
-    std::sort(inputs.begin(), inputs.end());
-    std::sort(outputs.begin(), outputs.end());
     std::cout << "input(s):" << std::endl;
-    for (std::size_t i = 0; i < inputs.size(); ++i) {
-        std::cout << "   " << inputs[i] << ": ";
-        std::cout << _components[inputs[i]]->compute(1) << std::endl;
+    for (std::size_t i = 0; i < _inputs.size(); ++i) {
+        std::cout << "   " << _inputs[i] << ": ";
+        std::cout << _components[_inputs[i]]->compute(1) << std::endl;
     }
-    std::cout << "output(s)" << std::endl;
-    for (std::size_t i = 0; i < outputs.size(); ++i) {
-        std::cout << "   " << outputs[i] << ": ";
-        std::cout << _components[outputs[i]]->compute(1) << std::endl;
+    std::cout << "output(s):" << std::endl;
+    for (std::size_t i = 0; i < _outputs.size(); ++i) {
+        std::cout << "   " << _outputs[i] << ": ";
+        std::cout << _components[_outputs[i]]->compute(1) << std::endl;
     }
-    std::cout << "> ";
 }
 
 void nts::Circuit::simulate()
@@ -119,11 +113,14 @@ void nts::Circuit::exit()
 
 void nts::Circuit::setInputValue(std::string name, std::string state)
 {
-    if (stoi(state) > 2 || stoi(state) < 0)
+    if (state.find_first_not_of("01U") != std::string::npos)
         throw nts::Error("nts: Wrong input value");
     if (_components.find(name) == _components.end())
         throw nts::Error("nts: Input not found");
-    _components[name]->setValue(static_cast<nts::Tristate>(stoi(state)));
+    if (state == "U")
+        _components[name]->setValue(nts::Tristate::Undefined);
+    else
+        _components[name]->setValue(static_cast<nts::Tristate>(stoi(state)));
 }
 
 void nts::Circuit::simulator()
@@ -133,14 +130,12 @@ void nts::Circuit::simulator()
     std::signal(SIGINT, Circuit::sigHandler);
     std::cout << "> ";
     while (!_exit && std::getline(std::cin, input)) {
-        if (_loop)
-            loop();
-        std::cout << "> ";
         if (!input.size())
             continue;
         command = ntsUtils::split(input, '=');
         if (command.size() == 2) {
             setInputValue(command[0], command[1]);
+            std::cout << "> ";
             continue;
         }
         std::map<std::string, void (nts::Circuit::*)(void)>::const_iterator it;
@@ -148,5 +143,9 @@ void nts::Circuit::simulator()
         if (it == _commands.end())
             throw nts::Error("nts: Command not found");
         ((*this).*(it->second))();
+        if (_loop)
+            loop();
+        if (!_exit)
+            std::cout << "> ";
     }
 }
