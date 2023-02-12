@@ -43,4 +43,5 @@ inline std::ostream &operator<<(std::ostream &stream,
         case nts::Tristate::Undefined:
             return stream << "U";
     }
+    return stream;
 }

@@ -20,7 +20,7 @@ void nts::AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size
 }
 
 nts::AComponent::AComponent()
-: _tick(0)
+: _tick(1)
 {
 }
 

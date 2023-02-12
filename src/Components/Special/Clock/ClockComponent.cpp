@@ -13,22 +13,31 @@ nts::Tristate nts::ClockComponent::compute(__attribute__((unused)) std::size_t p
 }
 
 nts::ClockComponent::ClockComponent()
-: _value(Undefined)
+: _value(Undefined), _newValue(Undefined)
 {
     _validPins = {Output};
 }
 
 void nts::ClockComponent::simulate(std::size_t tick)
 {
+    _value = _newValue;
     if (tick % 2 == _tick % 2)
         return;
     switch (_value) {
         case True:
             _value = False;
+            break;
         case False:
             _value = True;
+            break;
         case Undefined:
             break;
     }
     _tick = tick;
 }
+
+void nts::ClockComponent::setValue(nts::Tristate value)
+{
+    _newValue = value;
+}
+
