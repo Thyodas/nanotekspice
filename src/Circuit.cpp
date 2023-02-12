@@ -9,12 +9,12 @@
 #include "utils/utils.hpp"
 #include "Components/Special/Input/InputComponent.hpp"
 #include "Components/Special/Output/OutputComponent.hpp"
+#include "Components/Special/Clock/ClockComponent.hpp"
 #include <utility>
 #include <csignal>
 #include <vector>
 #include <map>
 #include <sstream>
-#include <bits/stdc++.h>
 
 bool nts::Circuit::_loop = false;
 
@@ -50,7 +50,7 @@ void nts::Circuit::addComponent(std::string type, std::string name, nts::Compone
     std::getline(iss, nameCleared, '#');
     nameCleared = ntsUtils::rtrim(nameCleared);
     if (_components.find(nameCleared) != _components.end())
-        throw nts::Error("nts: Two components have the same name");
+        throw nts::Error("nts: Two components have the same name " + nameCleared);
     std::unique_ptr<nts::IComponent> newComponent = factory->createComponent(type);
     _components[nameCleared] = std::move(newComponent);
 }
@@ -61,7 +61,6 @@ void nts::Circuit::setLinks(std::string name1, std::size_t pin1, std::string nam
         throw nts::Error("nts: Components not found");
     nts::IComponent *component1 = _components[name1].get();
     nts::IComponent *component2 = _components[name2].get();
-    component1->setLink(pin1, *component2, pin2);
     component2->setLink(pin2, *component1, pin1);
 }
 
@@ -85,6 +84,8 @@ void nts::Circuit::display()
     std::cout << "tick: " << _ticks << std::endl;
     for (const auto &it : _components) {
         if (dynamic_cast<nts::InputComponent *>(it.second.get()))
+            inputs.push_back(it.first);
+        if (dynamic_cast<nts::ClockComponent *>(it.second.get()))
             inputs.push_back(it.first);
         if (dynamic_cast<nts::OutputComponent *>(it.second.get()))
             outputs.push_back(it.first);

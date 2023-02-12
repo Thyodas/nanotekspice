@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** NanoTekSpice
 ** File description:
-** Chip4008Component.cpp
+** Chip4013Component.cpp
 */
 
 #include "Chip4013Component.hpp"

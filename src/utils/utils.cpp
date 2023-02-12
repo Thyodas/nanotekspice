@@ -91,7 +91,7 @@ void ntsUtils::parseFile(std::ifstream& file, nts::Circuit *circuit)
             parseLinks(file, circuit);
             continue;
         }
-        if (line[0] != '#' || line[0] != '\n')
+        if (line[0] != '#' && line[0] != '\n')
             throw nts::Error("nts: Wrong file formatting");
     }
 }
