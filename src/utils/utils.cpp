@@ -27,8 +27,12 @@ std::vector<std::string> ntsUtils::split(const std::string& s, char delimiter)
     std::vector<std::string> tokens;
     std::string token;
     std::istringstream tokenStream(s);
-    while (std::getline(tokenStream, token, delimiter))
+    while (std::getline(tokenStream, token, delimiter)) {
+        token = rtrim(token);
+        if (token == "")
+            continue;
         tokens.push_back(token);
+    }
     return tokens;
 }
 
@@ -60,6 +64,8 @@ void ntsUtils::parseLinks(std::ifstream& file, nts::Circuit *circuit)
     while (!file.eof()) {
         std::getline(file, line);
         results = ntsUtils::split(line, ' ');
+        if (results.empty() || results[0][0] == '#' || results[0][0] == '\n')
+            continue;
         if (results.empty())
             continue;
         if (results.size() < 2)
@@ -85,13 +91,12 @@ void ntsUtils::parseFile(std::ifstream& file, nts::Circuit *circuit)
     std::string line;
     while (!file.eof()) {
         std::getline(file, line);
-        std::cout << line << std::endl;
         if (line == ".chipsets:") {
             parseChipsets(file, circuit);
             parseLinks(file, circuit);
             continue;
         }
-        if (line[0] != '#' && line[0] != '\n')
+        if (line.size() != 0 && line[0] != '#' && line[0] != '\n')
             throw nts::Error("nts: Wrong file formatting");
     }
 }
