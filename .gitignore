@@ -5,6 +5,10 @@
 coding-style-reports.log
 .DS_Store
 a.out
+nanotekspice
+cmake_install.cmake
+CMakeCache.txt
+Makefile
 *.xml
 .idea/
 *.zip
@@ -23,3 +27,6 @@ B-OOP-400_nanotekspice.pdf
 B-OOP-400_nanotekspice_bootstrap.pdf
 B-OOP-400_nanotekspice/
 cmake-build-debug/
+build/
+CMakeFiles
+test_files
