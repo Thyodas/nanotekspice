@@ -21,7 +21,9 @@ set(SRCS
     src/Components/Gate/4030/Chip4030Component.cpp
     src/Components/Gate/4081/Chip4081Component.cpp
     src/Components/Gate/4069/Chip4069Component.cpp
+    src/Circuit.hpp
     src/Circuit.cpp
+    src/utils/utils.cpp
     )
 
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -std=c++20")
