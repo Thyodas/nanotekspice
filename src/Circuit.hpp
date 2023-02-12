@@ -13,9 +13,21 @@
 namespace nts {
     class Circuit {
         public:
-            void addComponent(IComponent* component, std::string name);
+            Circuit();
+            void addComponent(std::string type, std::string name);
+            void simulator();
+            static void sigHandler(int signum);
         private:
+            void setLoop();
+            void loop();
+            void display();
+            void simulate();
+            void exit();
+            void setInputValue(std::string name, std::string state);
+            std::map<std::string, void (nts::Circuit::*)(void)> _commands;
             std::map<std::string, IComponent *> _components;
+            public:
+            static bool _loop;
     };
 
     class Error : public std::exception {
