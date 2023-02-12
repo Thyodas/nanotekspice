@@ -32,6 +32,8 @@ namespace nts {
 
             std::map<std::string, void (nts::Circuit::*)(void)> _commands;
             std::map<std::string, std::unique_ptr<nts::IComponent>> _components;
+            std::vector<std::string> _inputs;
+            std::vector<std::string> _outputs;
             bool _exit = false;
             std::size_t _ticks;
     };
