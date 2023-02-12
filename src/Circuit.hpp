@@ -8,15 +8,20 @@
 #pragma once
 
 #include "IComponent.hpp"
+#include "Components/ComponentFactory.hpp"
 #include <map>
 
 namespace nts {
     class Circuit {
         public:
             Circuit();
-            void addComponent(std::string type, std::string name);
+            void addComponent(std::string type, std::string name, nts::ComponentFactory *factory);
+            void setLinks(std::string name1, std::size_t pin1, std::string name2, std::size_t pin2);
             void simulator();
+
             static void sigHandler(int signum);
+
+            static bool _loop;
         private:
             void setLoop();
             void loop();
@@ -24,10 +29,11 @@ namespace nts {
             void simulate();
             void exit();
             void setInputValue(std::string name, std::string state);
+
             std::map<std::string, void (nts::Circuit::*)(void)> _commands;
-            std::map<std::string, IComponent *> _components;
-            public:
-            static bool _loop;
+            std::map<std::string, std::unique_ptr<nts::IComponent>> _components;
+            bool _exit = false;
+            std::size_t _ticks;
     };
 
     class Error : public std::exception {

@@ -7,6 +7,13 @@
 
 #include "utils.hpp"
 
+std::string ntsUtils::rtrim(const std::string &s)
+{
+    const std::string WHITESPACE = " \t\f\v";
+    std::size_t end = s.find_last_not_of(WHITESPACE);
+    return (end == std::string::npos) ? "" : s.substr(0, end + 1);
+}
+
 std::ifstream ntsUtils::openFile(std::string filename)
 {
     std::ifstream file(filename);
@@ -20,9 +27,8 @@ std::vector<std::string> ntsUtils::split(const std::string& s, char delimiter)
     std::vector<std::string> tokens;
     std::string token;
     std::istringstream tokenStream(s);
-    while (std::getline(tokenStream, token, delimiter)) {
+    while (std::getline(tokenStream, token, delimiter))
         tokens.push_back(token);
-    }
     return tokens;
 }
 
@@ -30,6 +36,7 @@ void ntsUtils::parseChipsets(std::ifstream& file, nts::Circuit *circuit)
 {
     std::string line;
     std::vector<std::string> results;
+    nts::ComponentFactory factory;
     while (!file.eof()) {
         std::getline(file, line);
         results = ntsUtils::split(line, ' ');
@@ -41,9 +48,7 @@ void ntsUtils::parseChipsets(std::ifstream& file, nts::Circuit *circuit)
             throw nts::Error("nts: Wrong chipset formatting");
         std::string name = results[1];
         std::string type = results[0];
-        //TODO: remove comment when adding the name
-        std::cout << type << std::endl;
-        std::cout << name << std::endl;
+        circuit->addComponent(type, name, &factory);
     }
 }
 
@@ -61,15 +66,16 @@ void ntsUtils::parseLinks(std::ifstream& file, nts::Circuit *circuit)
             throw nts::Error("nts: Wrong chipset formatting");
         tokens = ntsUtils::split(results[0], ':');
         std::string name1 = tokens[0];
-        int link1 = std::stoi(tokens[1]);
+        std::size_t link1 = std::stoi(tokens[1]);
         tokens = ntsUtils::split(results[1], ':');
         std::string name2 = tokens[0];
-        int link2 = std::stoi(tokens[1]);
-        //TODO: Remove comment when adding the name
-        std::cout << name1 << std::endl;
-        std::cout << link1 << std::endl;
-        std::cout << name2 << std::endl;
-        std::cout << link2 << std::endl;
+        //Remove comment
+        std::istringstream iss(tokens[1]);
+        std::string token2Cleared;
+        std::getline(iss, token2Cleared, '#');
+        token2Cleared = rtrim(token2Cleared);
+        std::size_t link2 = std::stoi(token2Cleared);
+        circuit->setLinks(name1, link1, name2, link2);
     }
 }
 

@@ -8,6 +8,7 @@
 #pragma once
 
 #include "../Circuit.hpp"
+#include "../Components/ComponentFactory.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -20,4 +21,5 @@ namespace ntsUtils {
     void parseChipsets(std::ifstream& file, nts::Circuit *circuit);
     void parseLinks(std::ifstream& file, nts::Circuit *circuit);
     void parseFile(std::ifstream& file, nts::Circuit *circuit);
+    std::string rtrim(const std::string &s);
 };
