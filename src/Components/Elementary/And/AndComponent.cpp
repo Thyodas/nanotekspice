@@ -23,4 +23,6 @@ nts::Tristate nts::AndComponent::compute(std::size_t pin)
 nts::AndComponent::AndComponent()
 {
     _validPins = {InputA, InputB, Output};
+    _outputPins = {Output};
+
 }

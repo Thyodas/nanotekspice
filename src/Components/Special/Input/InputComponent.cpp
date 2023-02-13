@@ -16,6 +16,7 @@ nts::InputComponent::InputComponent()
 : _value(Undefined), _newValue(Undefined)
 {
     _validPins = {Output};
+    _outputPins = {Output};
 }
 
 void nts::InputComponent::setValue(nts::Tristate value)

@@ -15,4 +15,5 @@ nts::Tristate nts::TrueComponent::compute(__attribute__((unused)) std::size_t pi
 nts::TrueComponent::TrueComponent()
 {
     _validPins = {Output};
+    _outputPins = {Output};
 }

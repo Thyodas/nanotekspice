@@ -15,6 +15,7 @@ nts::Tristate nts::XorComponent::compute(std::size_t pin)
 nts::XorComponent::XorComponent()
 {
     _validPins = {InputA, InputB, Output};
+    _outputPins = {Output};
     andGateA.setLink(AndComponent::InputA, *this, InputA);
     notGateA.setLink(NotComponent::Input, *this, InputB);
     andGateA.setLink(AndComponent::InputB, notGateA, NotComponent::Output);

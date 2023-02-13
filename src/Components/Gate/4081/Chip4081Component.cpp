@@ -20,6 +20,7 @@ nts::Chip4081Component::Chip4081Component()
         Input3A, Input3B, Output3Y,
         Input4A, Input4B, Output4Y,
     };
+    _outputPins = {Output1Y, Output2Y, Output3Y, Output4Y};
 
     andGate1.setLink(AndComponent::InputA, *this, Input1A);
     andGate1.setLink(AndComponent::InputB, *this, Input1B);

@@ -15,6 +15,7 @@ nts::Tristate nts::Nand3Component::compute(std::size_t pin)
 nts::Nand3Component::Nand3Component()
 {
     _validPins = {InputA, InputB, InputC, Output};
+    _outputPins = {Output};
 
     nandGateA.setLink(nts::NandComponent::InputA, *this, InputA);
     nandGateA.setLink(nts::NandComponent::InputB, *this, InputB);

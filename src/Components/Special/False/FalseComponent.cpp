@@ -15,4 +15,5 @@ nts::Tristate nts::FalseComponent::compute(__attribute__((unused)) std::size_t p
 nts::FalseComponent::FalseComponent()
 {
     _validPins = {Output};
+    _outputPins = {Output};
 }

@@ -20,4 +20,5 @@ nts::Tristate nts::NotComponent::compute(std::size_t pin)
 nts::NotComponent::NotComponent()
 {
     _validPins = {Input, Output};
+    _outputPins = {Output};
 }

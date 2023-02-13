@@ -18,6 +18,7 @@ nts::Chip4013Component::Chip4013Component()
         OutQ1, OutNQ1, InClk1, InRst1, InData1, InSet1, InSet2, InData2,
         InRst2, InClk2, OutNQ2, OutQ2,
     };
+    _outputPins = {OutQ1, OutQ2, OutNQ1, OutNQ2};
 
     flipFlop1.setLink(DFlipFlopComponent::InClk, *this, InClk1);
     flipFlop1.setLink(DFlipFlopComponent::InRst, *this, InRst1);

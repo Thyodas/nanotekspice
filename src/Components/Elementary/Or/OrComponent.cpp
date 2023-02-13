@@ -23,4 +23,5 @@ nts::Tristate nts::OrComponent::compute(std::size_t pin)
 nts::OrComponent::OrComponent()
 {
     _validPins = {InputA, InputB, Output};
+    _outputPins = {Output};
 }
