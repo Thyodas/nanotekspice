@@ -15,9 +15,9 @@ void nts::AComponent::simulate(__attribute__((unused)) std::size_t tick)
         if (_outputPins.find(item.first) == _outputPins.end())
             continue;
         item.second.second->simulate(tick);
-        bool result = item.second.second->findRing(this, {});
-        if (result)
-            _computeCacheMap[item.first] = Undefined;
+        // bool result = item.second.second->findRing(this, {});
+        // if (result)
+        //     _computeCacheMap[item.first] = Undefined;
     }
 }
 
