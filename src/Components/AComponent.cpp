@@ -44,8 +44,8 @@ nts::Tristate nts::AComponent::getLink(std::size_t pin)
 {
     if (_linkMap.find(pin) == _linkMap.end())
         return Undefined;
-    if (_computeCacheMap.find(pin) != _computeCacheMap.end())
-        return _computeCacheMap.at(pin);
+    // if (_computeCacheMap.find(pin) != _computeCacheMap.end())
+    //     return _computeCacheMap.at(pin);
     auto pair = _linkMap.at(pin);
     Tristate result = pair.second->compute(pair.first);
     _computeCacheMap[pin] = result;
