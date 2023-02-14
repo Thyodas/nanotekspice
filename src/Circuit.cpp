@@ -30,7 +30,7 @@ nts::Circuit::Circuit()
     _commands["display"] = &nts::Circuit::display;
     _commands["simulate"] = &nts::Circuit::simulate;
     _commands["exit"] = &nts::Circuit::exit;
-    _ticks = 0;
+    _ticks = -1;
 }
 
 const char *nts::Error::what() const noexcept
@@ -68,6 +68,7 @@ void nts::Circuit::setLinks(std::string name1, std::size_t pin1, std::string nam
         throw nts::Error("nts: Component not found");
     nts::IComponent *component1 = _components[name1].get();
     nts::IComponent *component2 = _components[name2].get();
+    component1->setLink(pin1, *component2, pin2);
     component2->setLink(pin2, *component1, pin1);
 }
 
@@ -128,6 +129,7 @@ void nts::Circuit::simulator()
     std::string input;
     std::vector<std::string> command;
     std::signal(SIGINT, Circuit::sigHandler);
+    simulate();
     std::cout << "> ";
     while (!_exit && std::getline(std::cin, input)) {
         if (!input.size())

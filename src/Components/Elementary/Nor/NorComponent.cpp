@@ -15,6 +15,8 @@ nts::Tristate nts::NorComponent::compute(std::size_t pin)
 nts::NorComponent::NorComponent()
 {
     _validPins = {InputA, InputB, Output};
+    _outputPins = {Output};
+
     orGate.setLink(OrComponent::InputA, *this, InputA);
     orGate.setLink(OrComponent::InputB, *this, InputB);
     notGate.setLink(NotComponent::Input, orGate, OrComponent::Output);

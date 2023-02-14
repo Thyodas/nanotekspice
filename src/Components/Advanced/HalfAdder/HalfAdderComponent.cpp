@@ -15,6 +15,7 @@ nts::Tristate nts::HalfAdderComponent::compute(std::size_t pin)
 nts::HalfAdderComponent::HalfAdderComponent()
 {
     _validPins = {InputA, InputB, SumOutput, CarryOutput};
+    _outputPins = {SumOutput, CarryOutput};
 
     xorGate.setLink(nts::XorComponent::InputA, *this, InputA);
     xorGate.setLink(nts::XorComponent::InputB, *this, InputB);

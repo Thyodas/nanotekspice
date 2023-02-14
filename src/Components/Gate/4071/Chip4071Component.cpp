@@ -20,6 +20,7 @@ nts::Chip4071Component::Chip4071Component()
         Input3A, Input3B, Output3Y,
         Input4A, Input4B, Output4Y,
     };
+    _outputPins = {Output1Y, Output2Y, Output3Y, Output4Y};
 
     orGate1.setLink(OrComponent::InputA, *this, Input1A);
     orGate1.setLink(OrComponent::InputB, *this, Input1B);

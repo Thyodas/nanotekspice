@@ -19,6 +19,7 @@ nts::Tristate nts::DFlipFlopComponent::compute(std::size_t pin)
 nts::DFlipFlopComponent::DFlipFlopComponent()
 {
     _validPins = {InClk, InData, InRst, InSet, OutNQ, OutQ};
+    _outputPins = {OutNQ, OutQ};
 
     nand3GateA.setLink(Nand3Component::InputA, *this, InSet);
     nand3GateA.setLink(Nand3Component::InputB, nand3GateD, Nand3Component::Output);

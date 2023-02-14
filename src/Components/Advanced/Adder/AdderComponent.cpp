@@ -15,6 +15,7 @@ nts::Tristate nts::AdderComponent::compute(std::size_t pin)
 nts::AdderComponent::AdderComponent()
 {
     _validPins = {InputA, InputB, CarryInput, SumOutput, CarryOutput};
+    _outputPins = {SumOutput, CarryOutput};
 
     halfAdderGateA.setLink(nts::HalfAdderComponent::InputA, *this, InputA);
     halfAdderGateA.setLink(nts::HalfAdderComponent::InputB, *this, InputB);

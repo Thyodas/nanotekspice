@@ -25,5 +25,6 @@ namespace nts {
         private:
             Tristate _value;
             Tristate _newValue;
+            bool _toSet;
     };
 }

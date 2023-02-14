@@ -22,6 +22,7 @@ nts::Chip4069Component::Chip4069Component()
         Input5, Output5,
         Input6, Output6,
     };
+    _outputPins = {Output1, Output2, Output3, Output4, Output5, Output6};
 
     notGate1.setLink(NotComponent::Input, *this, Input1);
     this->setLink(Output1, notGate1, NotComponent::Output);

@@ -10,6 +10,7 @@
 #include "IComponent.hpp"
 #include "Components/ComponentFactory.hpp"
 #include <map>
+#include <vector>
 
 namespace nts {
     class Circuit {

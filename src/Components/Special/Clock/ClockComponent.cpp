@@ -13,14 +13,20 @@ nts::Tristate nts::ClockComponent::compute(__attribute__((unused)) std::size_t p
 }
 
 nts::ClockComponent::ClockComponent()
-: _value(Undefined), _newValue(Undefined)
+: _value(Undefined), _newValue(Undefined), _toSet(false)
 {
     _validPins = {Output};
+    _outputPins = {Output};
 }
 
 void nts::ClockComponent::simulate(std::size_t tick)
 {
-    _value = _newValue;
+    if (_toSet) {
+        _value = _newValue;
+        _toSet = false;
+        _tick = tick;
+        return;
+    }
     if (tick % 2 == _tick % 2)
         return;
     switch (_value) {
@@ -39,5 +45,5 @@ void nts::ClockComponent::simulate(std::size_t tick)
 void nts::ClockComponent::setValue(nts::Tristate value)
 {
     _newValue = value;
+    _toSet = true;
 }
-
