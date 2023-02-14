@@ -89,12 +89,12 @@ void nts::Circuit::display()
     std::cout << "tick: " << _ticks << std::endl;
     std::cout << "input(s):" << std::endl;
     for (std::size_t i = 0; i < _inputs.size(); ++i) {
-        std::cout << "   " << _inputs[i] << ": ";
+        std::cout << "  " << _inputs[i] << ": ";
         std::cout << _components[_inputs[i]]->compute(1) << std::endl;
     }
     std::cout << "output(s):" << std::endl;
     for (std::size_t i = 0; i < _outputs.size(); ++i) {
-        std::cout << "   " << _outputs[i] << ": ";
+        std::cout << "  " << _outputs[i] << ": ";
         std::cout << _components[_outputs[i]]->compute(1) << std::endl;
     }
 }
