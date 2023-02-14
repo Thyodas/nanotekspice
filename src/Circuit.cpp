@@ -126,6 +126,8 @@ void nts::Circuit::setInputValue(std::string name, std::string state)
 
 void nts::Circuit::simulator()
 {
+    if (!_components.size())
+        throw nts::Error("nts: No chipsets provided");
     std::string input;
     std::vector<std::string> command;
     std::signal(SIGINT, Circuit::sigHandler);
