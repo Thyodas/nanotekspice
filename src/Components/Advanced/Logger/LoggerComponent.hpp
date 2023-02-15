@@ -35,5 +35,6 @@ namespace nts {
             Tristate compute(std::size_t pin) override;
         private:
             std::ofstream _file;
+            bool simulateAllInputs(std::size_t tick);
     };
 } // nts

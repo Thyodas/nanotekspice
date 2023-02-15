@@ -30,8 +30,7 @@ namespace nts {
                                  std::size_t otherPin) = 0;
 
             virtual void setValue(nts::Tristate value) = 0;
-            virtual bool findRing(IComponent *ringStart,
-                                  std::list<IComponent *> pathHistory) = 0;
+            virtual void resetCache(void) = 0;
     };
 }
 

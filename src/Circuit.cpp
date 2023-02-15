@@ -30,7 +30,7 @@ nts::Circuit::Circuit()
     _commands["display"] = &nts::Circuit::display;
     _commands["simulate"] = &nts::Circuit::simulate;
     _commands["exit"] = &nts::Circuit::exit;
-    _ticks = -1;
+    _ticks = 0;
 }
 
 const char *nts::Error::what() const noexcept
@@ -103,8 +103,10 @@ void nts::Circuit::display()
 void nts::Circuit::simulate()
 {
     _ticks++;
-    for (const auto &it : _components)
+    for (const auto &it : _components) {
+        it.second->resetCache();
         it.second->simulate(_ticks);
+    }
 }
 
 void nts::Circuit::exit()
@@ -131,7 +133,6 @@ void nts::Circuit::simulator()
     std::string input;
     std::vector<std::string> command;
     std::signal(SIGINT, Circuit::sigHandler);
-    simulate();
     std::cout << "> ";
     while (!_exit && std::getline(std::cin, input)) {
         if (!input.size())

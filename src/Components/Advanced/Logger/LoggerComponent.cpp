@@ -8,11 +8,23 @@
 #include "LoggerComponent.hpp"
 #include "../../../Circuit.hpp"
 
+bool nts::LoggerComponent::simulateAllInputs(std::size_t tick)
+{
+    for (const auto &pin: _validPins) {
+        if (_linkMap.find(pin) == _linkMap.end())
+            return true;
+        auto pair = _linkMap.at(pin);
+        pair.second->simulate(tick);
+        if (getLink(pin) == Undefined)
+            return true;
+    }
+    return false;
+}
+
 void nts::LoggerComponent::simulate(std::size_t tick)
 {
-    if (_linkMap.find(InClock) == _linkMap.end())
+    if (simulateAllInputs(tick))
         return;
-    _linkMap.at(InClock).second->simulate(tick);
     if (getLink(InClock) != True || getLink(InInhibit) != False)
         return;
     int res = 0;
@@ -24,7 +36,7 @@ void nts::LoggerComponent::simulate(std::size_t tick)
     res |= getLink(In6) << 5;
     res |= getLink(In7) << 6;
     res |= getLink(In8) << 7;
-    _file << ((char)res);
+    _file << ((char)res) << std::flush;
 }
 
 nts::Tristate nts::LoggerComponent::compute(std::size_t pin)
