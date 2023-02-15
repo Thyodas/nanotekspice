@@ -66,20 +66,24 @@ void ntsUtils::parseLinks(std::ifstream& file, nts::Circuit *circuit)
         results = ntsUtils::split(line, ' ');
         if (results.empty() || results[0][0] == '#' || results[0][0] == '\n')
             continue;
-        if (results.empty())
-            continue;
         if (results.size() < 2)
             throw nts::Error("nts: Wrong chipset formatting");
         tokens = ntsUtils::split(results[0], ':');
+        if (tokens.size() != 2)
+            throw nts::Error("nts: Missing links");
         std::string name1 = tokens[0];
         std::size_t link1 = std::stoi(tokens[1]);
         tokens = ntsUtils::split(results[1], ':');
+        if (tokens.size() != 2)
+            throw nts::Error("nts: Missing links");
         std::string name2 = tokens[0];
         //Remove comment
         std::istringstream iss(tokens[1]);
         std::string token2Cleared;
         std::getline(iss, token2Cleared, '#');
         token2Cleared = rtrim(token2Cleared);
+        if (token2Cleared.empty())
+            throw nts::Error("nts: Missing links");
         std::size_t link2 = std::stoi(token2Cleared);
         circuit->setLinks(name1, link1, name2, link2);
     }
