@@ -14,7 +14,7 @@ nts::Tristate nts::Chip4008Component::compute(std::size_t pin)
 
 nts::Chip4008Component::Chip4008Component()
 {
-    _validPins = {InA1, InA2, InA3, InA4, InB1, InB2, InB3, InB4,
+    _validPins = {InA1, InC1, InA2, InA3, InA4, InB1, InB2, InB3, InB4,
                   OutCO, OutS1, OutS2, OutS3, OutS4};
     _outputPins = {OutCO, OutS1, OutS2, OutS3, OutS4};
 

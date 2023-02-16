@@ -24,7 +24,7 @@ void nts::AComponent::simulate(__attribute__((unused)) std::size_t tick)
 void nts::AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
 {
     if (!isValidPin(pin))
-        throw nts::Error("Invalid pin for this component.");
+        throw nts::Error("Invalid pin '" + std::to_string(pin) + "' for this component.");
     if (_linkMap.find(pin) != _linkMap.end())
         return;
     _linkMap[pin] = std::make_pair(otherPin, &other);

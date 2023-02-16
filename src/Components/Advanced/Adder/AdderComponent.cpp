@@ -20,7 +20,7 @@ nts::AdderComponent::AdderComponent()
     halfAdderGateA.setLink(nts::HalfAdderComponent::InputA, *this, InputA);
     halfAdderGateA.setLink(nts::HalfAdderComponent::InputB, *this, InputB);
 
-    halfAdderGateB.setLink(nts::HalfAdderComponent::InputA, halfAdderGateA, SumOutput);
+    halfAdderGateB.setLink(nts::HalfAdderComponent::InputA, halfAdderGateA, nts::HalfAdderComponent::SumOutput);
     halfAdderGateB.setLink(nts::HalfAdderComponent::InputB, *this, CarryInput);
 
     orGate.setLink(nts::OrComponent::InputA, halfAdderGateB, nts::HalfAdderComponent::CarryOutput);
