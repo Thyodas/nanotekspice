@@ -32,7 +32,7 @@ namespace nts {
             ~LoggerComponent();
 
             void simulate(std::size_t tick) override;
-            Tristate compute(std::size_t pin) override;
+            Tristate recompute(std::size_t pin) override;
         private:
             std::ofstream _file;
             bool simulateAllInputs(std::size_t tick);

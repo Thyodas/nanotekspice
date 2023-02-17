@@ -9,7 +9,7 @@
 
 #include <cstddef>
 #include <iostream>
-#include <list>
+#include <unordered_set>
 
 namespace nts {
     enum Tristate {
@@ -26,11 +26,17 @@ namespace nts {
 
             virtual nts::Tristate compute(std::size_t pin) = 0;
 
+            virtual nts::Tristate recompute(std::size_t pin) = 0;
+
             virtual void setLink(std::size_t pin, nts::IComponent &other,
                                  std::size_t otherPin) = 0;
 
             virtual void setValue(nts::Tristate value) = 0;
+
             virtual void resetCache(void) = 0;
+
+            virtual void findRing(IComponent *ringStart,
+                                  std::unordered_set<IComponent *> pathHistory) = 0;
     };
 }
 

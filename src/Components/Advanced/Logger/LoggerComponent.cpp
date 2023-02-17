@@ -39,7 +39,7 @@ void nts::LoggerComponent::simulate(std::size_t tick)
     _file << ((char)res) << std::flush;
 }
 
-nts::Tristate nts::LoggerComponent::compute(std::size_t pin)
+nts::Tristate nts::LoggerComponent::recompute(std::size_t pin)
 {
     return getLink(pin);
 }

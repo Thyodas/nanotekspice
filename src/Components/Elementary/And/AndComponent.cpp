@@ -7,7 +7,7 @@
 
 #include "AndComponent.hpp"
 
-nts::Tristate nts::AndComponent::compute(std::size_t pin)
+nts::Tristate nts::AndComponent::recompute(std::size_t pin)
 {
     if (pin != 3)
         return getLink(pin);

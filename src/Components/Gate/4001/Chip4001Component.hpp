@@ -33,7 +33,7 @@ namespace nts {
 
             Chip4001Component();
 
-            Tristate compute(std::size_t pin) override;
+            Tristate recompute(std::size_t pin) override;
         private:
             NorComponent norGate1;
             NorComponent norGate2;

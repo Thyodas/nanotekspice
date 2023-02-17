@@ -7,7 +7,7 @@
 
 #include "OrComponent.hpp"
 
-nts::Tristate nts::OrComponent::compute(std::size_t pin)
+nts::Tristate nts::OrComponent::recompute(std::size_t pin)
 {
     if (pin != Output)
         return getLink(pin);

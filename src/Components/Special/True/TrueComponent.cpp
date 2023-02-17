@@ -7,7 +7,7 @@
 
 #include "TrueComponent.hpp"
 
-nts::Tristate nts::TrueComponent::compute(__attribute__((unused)) std::size_t pin)
+nts::Tristate nts::TrueComponent::recompute(__attribute__((unused)) std::size_t pin)
 {
     return True;
 }

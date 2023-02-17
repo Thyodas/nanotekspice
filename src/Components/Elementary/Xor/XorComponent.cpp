@@ -7,7 +7,7 @@
 
 #include "XorComponent.hpp"
 
-nts::Tristate nts::XorComponent::compute(std::size_t pin)
+nts::Tristate nts::XorComponent::recompute(std::size_t pin)
 {
     return getLink(pin);
 }

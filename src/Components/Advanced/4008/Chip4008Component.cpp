@@ -7,7 +7,7 @@
 
 #include "Chip4008Component.hpp"
 
-nts::Tristate nts::Chip4008Component::compute(std::size_t pin)
+nts::Tristate nts::Chip4008Component::recompute(std::size_t pin)
 {
     return getLink(pin);
 }

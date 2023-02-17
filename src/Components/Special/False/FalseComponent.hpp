@@ -17,6 +17,6 @@ namespace nts {
             };
             FalseComponent();
 
-            Tristate compute(std::size_t pin) override;
+            Tristate recompute(std::size_t pin) override;
     };
 } // nts

@@ -7,7 +7,7 @@
 
 #include "HalfAdderComponent.hpp"
 
-nts::Tristate nts::HalfAdderComponent::compute(std::size_t pin)
+nts::Tristate nts::HalfAdderComponent::recompute(std::size_t pin)
 {
     return getLink(pin);
 }

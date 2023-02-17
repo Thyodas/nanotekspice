@@ -7,7 +7,7 @@
 
 #include "NorComponent.hpp"
 
-nts::Tristate nts::NorComponent::compute(std::size_t pin)
+nts::Tristate nts::NorComponent::recompute(std::size_t pin)
 {
     return getLink(pin);
 }

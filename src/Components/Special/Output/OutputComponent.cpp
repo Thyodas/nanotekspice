@@ -7,7 +7,7 @@
 
 #include "OutputComponent.hpp"
 
-nts::Tristate nts::OutputComponent::compute(std::size_t pin)
+nts::Tristate nts::OutputComponent::recompute(std::size_t pin)
 {
     return getLink(pin);
 }

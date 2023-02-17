@@ -33,7 +33,7 @@ namespace nts {
 
             Chip4071Component();
 
-            Tristate compute(std::size_t pin) override;
+            Tristate recompute(std::size_t pin) override;
         private:
             OrComponent orGate1;
             OrComponent orGate2;

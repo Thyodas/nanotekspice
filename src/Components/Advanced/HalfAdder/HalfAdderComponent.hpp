@@ -23,7 +23,7 @@ namespace nts {
 
             HalfAdderComponent();
 
-            Tristate compute(std::size_t pin) override;
+            Tristate recompute(std::size_t pin) override;
         private:
             nts::XorComponent xorGate;
             nts::AndComponent andGate;

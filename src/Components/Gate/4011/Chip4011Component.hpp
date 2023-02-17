@@ -33,7 +33,7 @@ namespace nts {
 
             Chip4011Component();
 
-            Tristate compute(std::size_t pin) override;
+            Tristate recompute(std::size_t pin) override;
         private:
             NandComponent nandGate1;
             NandComponent nandGate2;

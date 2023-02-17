@@ -7,7 +7,7 @@
 
 #include "NandComponent.hpp"
 
-nts::Tristate nts::NandComponent::compute(std::size_t pin)
+nts::Tristate nts::NandComponent::recompute(std::size_t pin)
 {
     return getLink(pin);
 }

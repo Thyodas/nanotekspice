@@ -7,9 +7,6 @@
 
 #include "Circuit.hpp"
 #include "utils/utils.hpp"
-#include "Components/Special/Input/InputComponent.hpp"
-#include "Components/Special/Output/OutputComponent.hpp"
-#include "Components/Special/Clock/ClockComponent.hpp"
 #include <utility>
 #include <csignal>
 #include <vector>
@@ -87,6 +84,8 @@ void nts::Circuit::loop()
 
 void nts::Circuit::display()
 {
+    for (auto &item: _components)
+        item.second->findRing(&(*item.second), {});
     std::cout << "tick: " << _ticks << std::endl;
     std::cout << "input(s):" << std::endl;
     for (std::size_t i = 0; i < _inputs.size(); ++i) {

@@ -7,7 +7,7 @@
 
 #include "ClockComponent.hpp"
 
-nts::Tristate nts::ClockComponent::compute(__attribute__((unused)) std::size_t pin)
+nts::Tristate nts::ClockComponent::recompute(__attribute__((unused)) std::size_t pin)
 {
     return _value;
 }

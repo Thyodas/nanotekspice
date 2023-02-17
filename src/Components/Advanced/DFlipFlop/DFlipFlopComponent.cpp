@@ -7,7 +7,7 @@
 
 #include "DFlipFlopComponent.hpp"
 
-nts::Tristate nts::DFlipFlopComponent::compute(std::size_t pin)
+nts::Tristate nts::DFlipFlopComponent::recompute(std::size_t pin)
 {
     return getLink(pin);
 }

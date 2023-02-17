@@ -23,7 +23,7 @@ namespace nts {
 
             Nand3Component();
 
-            Tristate compute(std::size_t pin) override;
+            Tristate recompute(std::size_t pin) override;
         private:
             nts::NandComponent nandGateA;
             nts::NandComponent nandGateB;

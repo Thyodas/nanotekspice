@@ -7,7 +7,7 @@
 
 #include "AdderComponent.hpp"
 
-nts::Tristate nts::AdderComponent::compute(std::size_t pin)
+nts::Tristate nts::AdderComponent::recompute(std::size_t pin)
 {
     return getLink(pin);
 }

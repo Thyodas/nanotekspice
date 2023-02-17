@@ -7,7 +7,7 @@
 
 #include "InputComponent.hpp"
 
-nts::Tristate nts::InputComponent::compute(__attribute__((unused)) std::size_t pin)
+nts::Tristate nts::InputComponent::recompute(__attribute__((unused)) std::size_t pin)
 {
     return _value;
 }

@@ -7,7 +7,7 @@
 
 #include "NotComponent.hpp"
 
-nts::Tristate nts::NotComponent::compute(std::size_t pin)
+nts::Tristate nts::NotComponent::recompute(std::size_t pin)
 {
     if (pin != Output)
         return getLink(pin);

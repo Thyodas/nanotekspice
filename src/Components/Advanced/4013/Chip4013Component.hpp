@@ -30,7 +30,7 @@ namespace nts {
 
             Chip4013Component();
 
-            Tristate compute(std::size_t pin) override;
+            Tristate recompute(std::size_t pin) override;
         private:
             DFlipFlopComponent flipFlop1;
             DFlipFlopComponent flipFlop2;
