@@ -84,8 +84,6 @@ void nts::Circuit::loop()
 
 void nts::Circuit::display()
 {
-    for (auto &item: _components)
-        item.second->findRing(&(*item.second), {});
     std::cout << "tick: " << _ticks << std::endl;
     std::cout << "input(s):" << std::endl;
     for (std::size_t i = 0; i < _inputs.size(); ++i) {

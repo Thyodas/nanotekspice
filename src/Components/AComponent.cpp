@@ -15,12 +15,11 @@ void nts::AComponent::resetCache(void)
 {
     if (_computeCacheMap.empty())
         return;
+    _prevComputeCacheMap.clear();
     _prevComputeCacheMap = _computeCacheMap;
     _computeCacheMap.clear();
     for (const auto &item: _linkMap)
         item.second.second->resetCache();
-    _ringList.clear();
-    _ringCheckedList.clear();
 }
 
 void nts::AComponent::simulate(__attribute__((unused)) std::size_t tick)
@@ -48,17 +47,16 @@ bool nts::AComponent::isValidPin(std::size_t pin) const
 
 nts::Tristate nts::AComponent::compute(std::size_t pin)
 {
-    if (_computeCacheMap.contains(pin))
+    if (!_inLoop && _computeCacheMap.contains(pin))
         return _computeCacheMap.at(pin);
-    if (_ringList.contains(this)) {
-        _ringList.erase(this);
-        if (_prevComputeCacheMap.contains(pin))
-            _computeCacheMap[pin] = _prevComputeCacheMap.at(pin);
-        else {
-            _computeCacheMap[pin] = Undefined;
-        }
+    if (_prevComputeCacheMap.contains(pin))
+        _computeCacheMap[pin] = _prevComputeCacheMap.at(pin);
+    else {
+        _computeCacheMap[pin] = Undefined;
     }
+    _inLoop = true;
     Tristate result = recompute(pin);
+    _inLoop = false;
     _computeCacheMap[pin] = result;
     return result;
 }

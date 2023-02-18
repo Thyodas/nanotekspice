@@ -33,6 +33,7 @@ namespace nts {
             std::unordered_set<std::size_t> _validPins;
             std::unordered_set<std::size_t> _outputPins;
         private:
+            bool _inLoop = false;
             std::unordered_map<std::size_t, nts::Tristate> _computeCacheMap;
             std::unordered_map<std::size_t, nts::Tristate> _prevComputeCacheMap;
             static std::unordered_set<IComponent *> _ringList;
