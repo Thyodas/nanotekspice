@@ -30,6 +30,7 @@ set(SRCS
     src/Components/Advanced/Logger/LoggerComponent.cpp
     src/Components/Advanced/DFlipFlop/DFlipFlopComponent.cpp
     src/Components/Advanced/4013/Chip4013Component.cpp
+    src/Components/Advanced/4017/Chip4017Component.cpp
     src/Components/ComponentFactory.cpp
     src/Circuit.cpp
     src/utils/utils.cpp

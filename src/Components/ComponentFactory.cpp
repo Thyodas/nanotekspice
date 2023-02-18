@@ -38,6 +38,7 @@
 #include "Advanced/Logger/LoggerComponent.hpp"
 #include "Advanced/DFlipFlop/DFlipFlopComponent.hpp"
 #include "Advanced/4013/Chip4013Component.hpp"
+#include "Advanced/4017/Chip4017Component.hpp"
 
 nts::ComponentFactory::~ComponentFactory() = default;
 
@@ -135,5 +136,8 @@ nts::ComponentFactory::ComponentFactory()
     });
     registerComponent("4013", []() {
         return std::make_unique<Chip4013Component>();
+    });
+    registerComponent("4017", []() {
+        return std::make_unique<Chip4017Component>();
     });
 }
