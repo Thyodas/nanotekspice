@@ -34,9 +34,6 @@ namespace nts {
             virtual void setValue(nts::Tristate value) = 0;
 
             virtual void resetCache(void) = 0;
-
-            virtual void findRing(IComponent *ringStart,
-                                  std::unordered_set<IComponent *> pathHistory) = 0;
     };
 }
 

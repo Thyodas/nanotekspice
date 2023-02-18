@@ -8,9 +8,6 @@
 #include "AComponent.hpp"
 #include "../Circuit.hpp"
 
-std::unordered_set<nts::IComponent *> nts::AComponent::_ringList = {};
-std::unordered_set<nts::IComponent *> nts::AComponent::_ringCheckedList = {};
-
 void nts::AComponent::resetCache(void)
 {
     if (_computeCacheMap.empty())
@@ -73,28 +70,4 @@ void nts::AComponent::setValue(__attribute__((unused)) nts::Tristate value)
 {
     throw nts::Error("Impossible to set a value to a component "
                      "that is neither a clock nor an input.");
-}
-
-void nts::AComponent::findRing(nts::IComponent *ringStart,
-                               std::unordered_set<IComponent *> pathHistory)
-{
-    if (_ringList.contains(this))
-        return;
-    if (!pathHistory.empty() && this == ringStart) {
-        _ringList.insert(this);
-        return;
-    }
-    if (pathHistory.contains(this))
-        return;
-    pathHistory.insert(this);
-    for (const auto &item: _linkMap) {
-        if (!_outputPins.contains(item.first))
-            item.second.second->findRing(ringStart, pathHistory);
-    }
-    if (_ringCheckedList.contains(this))
-        return;
-    _ringCheckedList.insert(this);
-    for (const auto &item: _linkMap) {
-        item.second.second->findRing(item.second.second, {});
-    }
 }

@@ -36,10 +36,6 @@ namespace nts {
             bool _inLoop = false;
             std::unordered_map<std::size_t, nts::Tristate> _computeCacheMap;
             std::unordered_map<std::size_t, nts::Tristate> _prevComputeCacheMap;
-            static std::unordered_set<IComponent *> _ringList;
-            static std::unordered_set<IComponent *> _ringCheckedList;
             void resetCache(void) override;
-            void findRing(IComponent *ringStart,
-                          std::unordered_set<IComponent *> pathHistory) override;
     };
 }
