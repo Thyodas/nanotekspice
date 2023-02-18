@@ -34,5 +34,8 @@ namespace nts {
 
             nts::Nand3Component nand3GateOutA;
             nts::Nand3Component nand3GateOutB;
+
+            nts::NotComponent notGateSet;
+            nts::NotComponent notGateReset;
     };
 } // nts
