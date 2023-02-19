@@ -40,6 +40,7 @@
 #include "Advanced/SRFlipFlop/SRFlipFlopComponent.hpp"
 #include "Advanced/4013/Chip4013Component.hpp"
 #include "Advanced/4017/Chip4017Component.hpp"
+#include "Advanced/4514/Chip4514Component.hpp"
 
 nts::ComponentFactory::~ComponentFactory() = default;
 
@@ -144,5 +145,8 @@ nts::ComponentFactory::ComponentFactory()
     });
     registerComponent("4017", []() {
         return std::make_unique<Chip4017Component>();
+    });
+    registerComponent("4514", []() {
+        return std::make_unique<Chip4514Component>();
     });
 }

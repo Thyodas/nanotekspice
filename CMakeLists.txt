@@ -32,6 +32,7 @@ set(SRCS
     src/Components/Advanced/SRFlipFlop/SRFlipFlopComponent.cpp
     src/Components/Advanced/4013/Chip4013Component.cpp
     src/Components/Advanced/4017/Chip4017Component.cpp
+    src/Components/Advanced/4514/Chip4514Component.cpp
     src/Components/ComponentFactory.cpp
     src/Circuit.cpp
     src/utils/utils.cpp
