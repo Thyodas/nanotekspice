@@ -104,11 +104,11 @@ void nts::Circuit::simulate()
     for (const auto &it : _components) {
         it.second->resetCache();
         it.second->simulate(_ticks);
-        for (const auto &item: _inputs)
-            _IOCache[item] = _components.at(item)->compute(1);
-        for (const auto &item: _outputs)
-            _IOCache[item] = _components.at(item)->compute(1);
     }
+    for (const auto &item: _inputs)
+        _IOCache[item] = _components.at(item)->compute(1);
+    for (const auto &item: _outputs)
+        _IOCache[item] = _components.at(item)->compute(1);
 }
 
 void nts::Circuit::exit()
