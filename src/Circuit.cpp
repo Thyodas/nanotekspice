@@ -86,23 +86,28 @@ void nts::Circuit::display()
 {
     std::cout << "tick: " << _ticks << std::endl;
     std::cout << "input(s):" << std::endl;
-    for (std::size_t i = 0; i < _inputs.size(); ++i) {
-        std::cout << "  " << _inputs[i] << ": ";
-        std::cout << _components[_inputs[i]]->compute(1) << std::endl;
+    for (const auto &item: _inputs) {
+        std::cout << "  " << item << ": ";
+        std::cout << (_IOCache.contains(item) ? _IOCache.at(item) : nts::Undefined) << std::endl;
     }
     std::cout << "output(s):" << std::endl;
-    for (std::size_t i = 0; i < _outputs.size(); ++i) {
-        std::cout << "  " << _outputs[i] << ": ";
-        std::cout << _components[_outputs[i]]->compute(1) << std::endl;
+    for (const auto &item: _outputs) {
+        std::cout << "  " << item << ": ";
+        std::cout << (_IOCache.contains(item) ? _IOCache.at(item) : nts::Undefined) << std::endl;
     }
 }
 
 void nts::Circuit::simulate()
 {
     _ticks++;
+    _IOCache.clear();
     for (const auto &it : _components) {
         it.second->resetCache();
         it.second->simulate(_ticks);
+        for (const auto &item: _inputs)
+            _IOCache[item] = _components.at(item)->compute(1);
+        for (const auto &item: _outputs)
+            _IOCache[item] = _components.at(item)->compute(1);
     }
 }
 

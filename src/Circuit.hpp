@@ -10,6 +10,7 @@
 #include "IComponent.hpp"
 #include "Components/ComponentFactory.hpp"
 #include <map>
+#include <unordered_map>
 #include <vector>
 
 namespace nts {
@@ -33,6 +34,7 @@ namespace nts {
 
             std::map<std::string, void (nts::Circuit::*)(void)> _commands;
             std::map<std::string, std::unique_ptr<nts::IComponent>> _components;
+            std::unordered_map<std::string, nts::Tristate> _IOCache;
             std::vector<std::string> _inputs;
             std::vector<std::string> _outputs;
             bool _exit = false;
