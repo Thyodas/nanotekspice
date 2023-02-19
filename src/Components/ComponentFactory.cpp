@@ -37,6 +37,7 @@
 #include "Advanced/4008/Chip4008Component.hpp"
 #include "Advanced/Logger/LoggerComponent.hpp"
 #include "Advanced/DFlipFlop/DFlipFlopComponent.hpp"
+#include "Advanced/SRFlipFlop/SRFlipFlopComponent.hpp"
 #include "Advanced/4013/Chip4013Component.hpp"
 #include "Advanced/4017/Chip4017Component.hpp"
 
@@ -134,6 +135,10 @@ nts::ComponentFactory::ComponentFactory()
     registerComponent("dflipflop", []() {
         return std::make_unique<DFlipFlopComponent>();
     });
+    registerComponent("srflipflop", []() {
+        return std::make_unique<SRFlipFlopComponent>();
+    });
+
     registerComponent("4013", []() {
         return std::make_unique<Chip4013Component>();
     });

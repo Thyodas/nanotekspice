@@ -25,6 +25,7 @@ B-OOP-400_nanotekspice/
 cmake-build-debug/
 build/
 test_files
+input_files
 
 CMakeCache.txt
 
