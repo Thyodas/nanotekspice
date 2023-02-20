@@ -18,31 +18,30 @@ nts::Chip4514Component::Chip4514Component()
                   S0, S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12, S13, S14, S15};
     _outputPins = {S0, S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12, S13, S14, S15};
 
-    notGateA.setLink(NotComponent::Input, *this, InputA);
-    notGateB.setLink(NotComponent::Input, *this, InputB);
-    notGateC.setLink(NotComponent::Input, *this, InputC);
-    notGateD.setLink(NotComponent::Input, *this, InputD);
-
-    notGateStrobe.setLink(NotComponent::Input, *this, Strobe);
     notGateInhibit.setLink(NotComponent::Input, *this, Inhibit);
 
-    andGateA.setLink(AndComponent::InputA, notGateA, NotComponent::Output);
-    andGateA.setLink(AndComponent::InputB, notGateStrobe, NotComponent::Output);
-    andGateB.setLink(AndComponent::InputA, notGateB, NotComponent::Output);
-    andGateB.setLink(AndComponent::InputB, notGateStrobe, NotComponent::Output);
-    andGateC.setLink(AndComponent::InputA, notGateC, NotComponent::Output);
-    andGateC.setLink(AndComponent::InputB, notGateStrobe, NotComponent::Output);
-    andGateD.setLink(AndComponent::InputA, notGateD, NotComponent::Output);
-    andGateD.setLink(AndComponent::InputB, notGateStrobe, NotComponent::Output);
+    andGateA.setLink(AndComponent::InputA, *this, InputA);
+    andGateA.setLink(AndComponent::InputB, *this, Strobe);
+    andGateB.setLink(AndComponent::InputA, *this, InputB);
+    andGateB.setLink(AndComponent::InputB, *this, Strobe);
+    andGateC.setLink(AndComponent::InputA, *this, InputC);
+    andGateC.setLink(AndComponent::InputB, *this, Strobe);
+    andGateD.setLink(AndComponent::InputA, *this, InputD);
+    andGateD.setLink(AndComponent::InputB, *this, Strobe);
 
-    andGateAS.setLink(AndComponent::InputA, andGateA, AndComponent::Output);
-    andGateAS.setLink(AndComponent::InputB, notGateStrobe, NotComponent::Output);
-    andGateBS.setLink(AndComponent::InputA, andGateB, AndComponent::Output);
-    andGateBS.setLink(AndComponent::InputB, notGateStrobe, NotComponent::Output);
-    andGateCS.setLink(AndComponent::InputA, andGateC, AndComponent::Output);
-    andGateCS.setLink(AndComponent::InputB, notGateStrobe, NotComponent::Output);
-    andGateDS.setLink(AndComponent::InputA, andGateD, AndComponent::Output);
-    andGateDS.setLink(AndComponent::InputB, notGateStrobe, NotComponent::Output);
+    notGateA.setLink(NotComponent::Input, andGateA, AndComponent::Output);
+    notGateB.setLink(NotComponent::Input, andGateB, AndComponent::Output);
+    notGateC.setLink(NotComponent::Input, andGateC, AndComponent::Output);
+    notGateD.setLink(NotComponent::Input, andGateD, AndComponent::Output);
+
+    andGateAS.setLink(AndComponent::InputA, notGateA, NotComponent::Output);
+    andGateAS.setLink(AndComponent::InputB, *this, Strobe);
+    andGateBS.setLink(AndComponent::InputA, notGateB, NotComponent::Output);
+    andGateBS.setLink(AndComponent::InputB, *this, Strobe);
+    andGateCS.setLink(AndComponent::InputA, notGateC, NotComponent::Output);
+    andGateCS.setLink(AndComponent::InputB, *this, Strobe);
+    andGateDS.setLink(AndComponent::InputA, notGateD, NotComponent::Output);
+    andGateDS.setLink(AndComponent::InputB, *this, Strobe);
 
     SRFlipFlopA.setLink(SRFlipFlopComponent::InSet, andGateA, AndComponent::Output);
     SRFlipFlopA.setLink(SRFlipFlopComponent::InRst, andGateAS, AndComponent::Output);
@@ -53,70 +52,85 @@ nts::Chip4514Component::Chip4514Component()
     SRFlipFlopD.setLink(SRFlipFlopComponent::InSet, andGateD, AndComponent::Output);
     SRFlipFlopD.setLink(SRFlipFlopComponent::InRst, andGateDS, AndComponent::Output);
 
-    andGateAB.setLink(AndComponent::InputA, SRFlipFlopA, SRFlipFlopComponent::OutQ);
-    andGateAB.setLink(AndComponent::InputB, SRFlipFlopB, SRFlipFlopComponent::OutQ);
-    andGateNAB.setLink(AndComponent::InputA, SRFlipFlopA, SRFlipFlopComponent::OutNQ);
-    andGateNAB.setLink(AndComponent::InputB, SRFlipFlopB, SRFlipFlopComponent::OutQ);
-    andGateANB.setLink(AndComponent::InputA, SRFlipFlopA, SRFlipFlopComponent::OutQ);
-    andGateANB.setLink(AndComponent::InputB, SRFlipFlopB, SRFlipFlopComponent::OutNQ);
-    andGateNANB.setLink(AndComponent::InputA, SRFlipFlopA, SRFlipFlopComponent::OutNQ);
-    andGateNANB.setLink(AndComponent::InputB, SRFlipFlopB, SRFlipFlopComponent::OutNQ);
-    andGateCD.setLink(AndComponent::InputA, SRFlipFlopC, SRFlipFlopComponent::OutQ);
-    andGateCD.setLink(AndComponent::InputB, SRFlipFlopD, SRFlipFlopComponent::OutQ);
-    andGateNCD.setLink(AndComponent::InputA, SRFlipFlopC, SRFlipFlopComponent::OutNQ);
-    andGateNCD.setLink(AndComponent::InputB, SRFlipFlopD, SRFlipFlopComponent::OutQ);
-    andGateCND.setLink(AndComponent::InputA, SRFlipFlopC, SRFlipFlopComponent::OutQ);
-    andGateCND.setLink(AndComponent::InputB, SRFlipFlopD, SRFlipFlopComponent::OutNQ);
-    andGateNCND.setLink(AndComponent::InputA, SRFlipFlopC, SRFlipFlopComponent::OutNQ);
-    andGateNCND.setLink(AndComponent::InputB, SRFlipFlopD, SRFlipFlopComponent::OutNQ);
+    andGateA2.setLink(AndComponent::InputA, SRFlipFlopA, SRFlipFlopComponent::OutNQ);
+    andGateA2.setLink(AndComponent::InputB, SRFlipFlopB, SRFlipFlopComponent::OutNQ);
+    andGateB2.setLink(AndComponent::InputA, SRFlipFlopA, SRFlipFlopComponent::OutQ);
+    andGateB2.setLink(AndComponent::InputB, SRFlipFlopB, SRFlipFlopComponent::OutNQ);
+    andGateC2.setLink(AndComponent::InputA, SRFlipFlopA, SRFlipFlopComponent::OutNQ);
+    andGateC2.setLink(AndComponent::InputB, SRFlipFlopB, SRFlipFlopComponent::OutQ);
+    andGateD2.setLink(AndComponent::InputA, SRFlipFlopA, SRFlipFlopComponent::OutQ);
+    andGateD2.setLink(AndComponent::InputB, SRFlipFlopB, SRFlipFlopComponent::OutQ);
+    andGateE2.setLink(AndComponent::InputA, SRFlipFlopC, SRFlipFlopComponent::OutNQ);
+    andGateE2.setLink(AndComponent::InputB, SRFlipFlopD, SRFlipFlopComponent::OutNQ);
+    andGateF2.setLink(AndComponent::InputA, SRFlipFlopC, SRFlipFlopComponent::OutQ);
+    andGateF2.setLink(AndComponent::InputB, SRFlipFlopD, SRFlipFlopComponent::OutNQ);
+    andGateG2.setLink(AndComponent::InputA, SRFlipFlopC, SRFlipFlopComponent::OutNQ);
+    andGateG2.setLink(AndComponent::InputB, SRFlipFlopD, SRFlipFlopComponent::OutQ);
+    andGateH2.setLink(AndComponent::InputA, SRFlipFlopC, SRFlipFlopComponent::OutQ);
+    andGateH2.setLink(AndComponent::InputB, SRFlipFlopD, SRFlipFlopComponent::OutQ);
 
-    nandGateS0.setLink(Nand3Component::InputA, andGateCD, AndComponent::Output);
-    nandGateS0.setLink(Nand3Component::InputB, andGateAB, AndComponent::Output);
+    nandGateS0.setLink(Nand3Component::InputA, andGateE2, AndComponent::Output);
+    nandGateS0.setLink(Nand3Component::InputB, andGateA2, AndComponent::Output);
     nandGateS0.setLink(Nand3Component::InputC, notGateInhibit, NotComponent::Output);
-    nandGateS1.setLink(Nand3Component::InputA, andGateCD, AndComponent::Output);
-    nandGateS1.setLink(Nand3Component::InputB, andGateNAB, AndComponent::Output);
+
+    nandGateS1.setLink(Nand3Component::InputA, andGateE2, AndComponent::Output);
+    nandGateS1.setLink(Nand3Component::InputB, andGateB2, AndComponent::Output);
     nandGateS1.setLink(Nand3Component::InputC, notGateInhibit, NotComponent::Output);
-    nandGateS2.setLink(Nand3Component::InputA, andGateCD, AndComponent::Output);
-    nandGateS2.setLink(Nand3Component::InputB, andGateANB, AndComponent::Output);
+
+    nandGateS2.setLink(Nand3Component::InputA, andGateE2, AndComponent::Output);
+    nandGateS2.setLink(Nand3Component::InputB, andGateC2, AndComponent::Output);
     nandGateS2.setLink(Nand3Component::InputC, notGateInhibit, NotComponent::Output);
-    nandGateS3.setLink(Nand3Component::InputA, andGateCD, AndComponent::Output);
-    nandGateS3.setLink(Nand3Component::InputB, andGateNANB, AndComponent::Output);
+
+    nandGateS3.setLink(Nand3Component::InputA, andGateE2, AndComponent::Output);
+    nandGateS3.setLink(Nand3Component::InputB, andGateD2, AndComponent::Output);
     nandGateS3.setLink(Nand3Component::InputC, notGateInhibit, NotComponent::Output);
-    nandGateS4.setLink(Nand3Component::InputA, andGateNCD, AndComponent::Output);
-    nandGateS4.setLink(Nand3Component::InputB, andGateAB, AndComponent::Output);
+
+    nandGateS4.setLink(Nand3Component::InputA, andGateF2, AndComponent::Output);
+    nandGateS4.setLink(Nand3Component::InputB, andGateA2, AndComponent::Output);
     nandGateS4.setLink(Nand3Component::InputC, notGateInhibit, NotComponent::Output);
-    nandGateS5.setLink(Nand3Component::InputA, andGateNCD, AndComponent::Output);
-    nandGateS5.setLink(Nand3Component::InputB, andGateNAB, AndComponent::Output);
+
+    nandGateS5.setLink(Nand3Component::InputA, andGateF2, AndComponent::Output);
+    nandGateS5.setLink(Nand3Component::InputB, andGateB2, AndComponent::Output);
     nandGateS5.setLink(Nand3Component::InputC, notGateInhibit, NotComponent::Output);
-    nandGateS6.setLink(Nand3Component::InputA, andGateNCD, AndComponent::Output);
-    nandGateS6.setLink(Nand3Component::InputB, andGateANB, AndComponent::Output);
+    
+    nandGateS6.setLink(Nand3Component::InputA, andGateF2, AndComponent::Output);
+    nandGateS6.setLink(Nand3Component::InputB, andGateC2, AndComponent::Output);
     nandGateS6.setLink(Nand3Component::InputC, notGateInhibit, NotComponent::Output);
-    nandGateS7.setLink(Nand3Component::InputA, andGateNCD, AndComponent::Output);
-    nandGateS7.setLink(Nand3Component::InputB, andGateNANB, AndComponent::Output);
+    
+    nandGateS7.setLink(Nand3Component::InputA, andGateF2, AndComponent::Output);
+    nandGateS7.setLink(Nand3Component::InputB, andGateD2, AndComponent::Output);
     nandGateS7.setLink(Nand3Component::InputC, notGateInhibit, NotComponent::Output);
-    nandGateS8.setLink(Nand3Component::InputA, andGateCND, AndComponent::Output);
-    nandGateS8.setLink(Nand3Component::InputB, andGateAB, AndComponent::Output);
+    
+    nandGateS8.setLink(Nand3Component::InputA, andGateG2, AndComponent::Output);
+    nandGateS8.setLink(Nand3Component::InputB, andGateA2, AndComponent::Output);
     nandGateS8.setLink(Nand3Component::InputC, notGateInhibit, NotComponent::Output);
-    nandGateS9.setLink(Nand3Component::InputA, andGateCND, AndComponent::Output);
-    nandGateS9.setLink(Nand3Component::InputB, andGateNAB, AndComponent::Output);
+    
+    nandGateS9.setLink(Nand3Component::InputA, andGateG2, AndComponent::Output);
+    nandGateS9.setLink(Nand3Component::InputB, andGateB2, AndComponent::Output);
     nandGateS9.setLink(Nand3Component::InputC, notGateInhibit, NotComponent::Output);
-    nandGateS10.setLink(Nand3Component::InputA, andGateCND, AndComponent::Output);
-    nandGateS10.setLink(Nand3Component::InputB, andGateANB, AndComponent::Output);
+    
+    nandGateS10.setLink(Nand3Component::InputA, andGateG2, AndComponent::Output);
+    nandGateS10.setLink(Nand3Component::InputB, andGateC2, AndComponent::Output);
     nandGateS10.setLink(Nand3Component::InputC, notGateInhibit, NotComponent::Output);
-    nandGateS11.setLink(Nand3Component::InputA, andGateCND, AndComponent::Output);
-    nandGateS11.setLink(Nand3Component::InputB, andGateNANB, AndComponent::Output);
+    
+    nandGateS11.setLink(Nand3Component::InputA, andGateG2, AndComponent::Output);
+    nandGateS11.setLink(Nand3Component::InputB, andGateD2, AndComponent::Output);
     nandGateS11.setLink(Nand3Component::InputC, notGateInhibit, NotComponent::Output);
-    nandGateS12.setLink(Nand3Component::InputA, andGateNCND, AndComponent::Output);
-    nandGateS12.setLink(Nand3Component::InputB, andGateAB, AndComponent::Output);
+    
+    nandGateS12.setLink(Nand3Component::InputA, andGateH2, AndComponent::Output);
+    nandGateS12.setLink(Nand3Component::InputB, andGateA2, AndComponent::Output);
     nandGateS12.setLink(Nand3Component::InputC, notGateInhibit, NotComponent::Output);
-    nandGateS13.setLink(Nand3Component::InputA, andGateNCND, AndComponent::Output);
-    nandGateS13.setLink(Nand3Component::InputB, andGateNAB, AndComponent::Output);
+    
+    nandGateS13.setLink(Nand3Component::InputA, andGateH2, AndComponent::Output);
+    nandGateS13.setLink(Nand3Component::InputB, andGateB2, AndComponent::Output);
     nandGateS13.setLink(Nand3Component::InputC, notGateInhibit, NotComponent::Output);
-    nandGateS14.setLink(Nand3Component::InputA, andGateNCND, AndComponent::Output);
-    nandGateS14.setLink(Nand3Component::InputB, andGateANB, AndComponent::Output);
+    
+    nandGateS14.setLink(Nand3Component::InputA, andGateH2, AndComponent::Output);
+    nandGateS14.setLink(Nand3Component::InputB, andGateC2, AndComponent::Output);
     nandGateS14.setLink(Nand3Component::InputC, notGateInhibit, NotComponent::Output);
-    nandGateS15.setLink(Nand3Component::InputA, andGateNCND, AndComponent::Output);
-    nandGateS15.setLink(Nand3Component::InputB, andGateNANB, AndComponent::Output);
+    
+    nandGateS15.setLink(Nand3Component::InputA, andGateH2, AndComponent::Output);
+    nandGateS15.setLink(Nand3Component::InputB, andGateD2, AndComponent::Output);
     nandGateS15.setLink(Nand3Component::InputC, notGateInhibit, NotComponent::Output);
 
     notGateS0.setLink(NotComponent::Input, nandGateS0, Nand3Component::Output);

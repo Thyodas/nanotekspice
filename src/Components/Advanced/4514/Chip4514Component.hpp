@@ -52,7 +52,6 @@ namespace nts {
             NotComponent notGateC;
             NotComponent notGateD;
 
-            NotComponent notGateStrobe;
             NotComponent notGateInhibit;
 
             AndComponent andGateA;
@@ -70,14 +69,14 @@ namespace nts {
             SRFlipFlopComponent SRFlipFlopC;
             SRFlipFlopComponent SRFlipFlopD;
 
-            AndComponent andGateAB;
-            AndComponent andGateNAB;
-            AndComponent andGateANB;
-            AndComponent andGateNANB;
-            AndComponent andGateCD;
-            AndComponent andGateNCD;
-            AndComponent andGateCND;
-            AndComponent andGateNCND;
+            AndComponent andGateA2;
+            AndComponent andGateB2;
+            AndComponent andGateC2;
+            AndComponent andGateD2;
+            AndComponent andGateE2;
+            AndComponent andGateF2;
+            AndComponent andGateG2;
+            AndComponent andGateH2;
 
             Nand3Component nandGateS0;
             Nand3Component nandGateS1;
