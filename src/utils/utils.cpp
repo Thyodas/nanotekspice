@@ -95,7 +95,10 @@ void ntsUtils::parseFile(std::ifstream& file, nts::Circuit *circuit)
     std::string line;
     while (!file.eof()) {
         std::getline(file, line);
-        if (line == ".chipsets:") {
+        std::istringstream iss(line);
+        std::string lineCleared;
+        std::getline(iss, lineCleared, '#');
+        if (lineCleared == ".chipsets:") {
             parseChipsets(file, circuit);
             parseLinks(file, circuit);
             continue;
