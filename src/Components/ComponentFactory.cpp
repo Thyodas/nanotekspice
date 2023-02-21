@@ -18,6 +18,7 @@
 // All Elementary
 #include "Elementary/Or/OrComponent.hpp"
 #include "Elementary/And/AndComponent.hpp"
+#include "Elementary/And3/And3Component.hpp"
 #include "Elementary/Xor/XorComponent.hpp"
 #include "Elementary/Nand/NandComponent.hpp"
 #include "Elementary/Nand3/Nand3Component.hpp"
@@ -41,6 +42,8 @@
 #include "Advanced/4013/Chip4013Component.hpp"
 #include "Advanced/4017/Chip4017Component.hpp"
 #include "Advanced/4514/Chip4514Component.hpp"
+#include "Advanced/4040/Chip4040Component.hpp"
+#include "Advanced/JKFlipFlop/JKFlipFlopComponent.hpp"
 
 nts::ComponentFactory::~ComponentFactory() = default;
 
@@ -80,6 +83,9 @@ nts::ComponentFactory::ComponentFactory()
     // Elementary
     registerComponent("and", []() {
         return std::make_unique<AndComponent>();
+    });
+    registerComponent("and3", []() {
+        return std::make_unique<And3Component>();
     });
     registerComponent("or", []() {
         return std::make_unique<OrComponent>();
@@ -140,11 +146,17 @@ nts::ComponentFactory::ComponentFactory()
         return std::make_unique<SRFlipFlopComponent>();
     });
 
+    registerComponent("jkflipflop", []() {
+        return std::make_unique<JKFlipFlopComponent>();
+    });
     registerComponent("4013", []() {
         return std::make_unique<Chip4013Component>();
     });
     registerComponent("4017", []() {
         return std::make_unique<Chip4017Component>();
+    });
+    registerComponent("4040", []() {
+        return std::make_unique<Chip4040Component>();
     });
     registerComponent("4514", []() {
         return std::make_unique<Chip4514Component>();

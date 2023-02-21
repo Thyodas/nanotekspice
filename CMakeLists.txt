@@ -11,6 +11,7 @@ set(SRCS
     src/Components/Special/Output/OutputComponent.cpp
     src/Components/Special/Clock/ClockComponent.cpp
     src/Components/Elementary/And/AndComponent.cpp
+    src/Components/Elementary/And3/And3Component.cpp
     src/Components/Elementary/Not/NotComponent.cpp
     src/Components/Elementary/Or/OrComponent.cpp
     src/Components/Elementary/Xor/XorComponent.cpp
@@ -30,9 +31,11 @@ set(SRCS
     src/Components/Advanced/Logger/LoggerComponent.cpp
     src/Components/Advanced/DFlipFlop/DFlipFlopComponent.cpp
     src/Components/Advanced/SRFlipFlop/SRFlipFlopComponent.cpp
+    src/Components/Advanced/JKFlipFlop/JKFlipFlopComponent.cpp
     src/Components/Advanced/4013/Chip4013Component.cpp
     src/Components/Advanced/4017/Chip4017Component.cpp
     src/Components/Advanced/4514/Chip4514Component.cpp
+    src/Components/Advanced/4040/Chip4040Component.cpp
     src/Components/ComponentFactory.cpp
     src/Circuit.cpp
     src/utils/utils.cpp
