@@ -34,34 +34,12 @@ namespace nts {
 
             Chip4040Component();
 
+            void simulate(std::size_t tick) override;
+
             Tristate recompute(std::size_t pin) override;
         private:
-            NotComponent notGateClk;
-            OrComponent orGateClk;
-
-            NotComponent notGateFF1;
-            NotComponent notGateFF2;
-            NotComponent notGateFF3;
-            NotComponent notGateFF4;
-            NotComponent notGateFF5;
-            NotComponent notGateFF6;
-            NotComponent notGateFF7;
-            NotComponent notGateFF8;
-            NotComponent notGateFF9;
-            NotComponent notGateFF10;
-            NotComponent notGateFF11;
-
-            JKFlipFlopComponent flipFlop1;
-            JKFlipFlopComponent flipFlop2;
-            JKFlipFlopComponent flipFlop3;
-            JKFlipFlopComponent flipFlop4;
-            JKFlipFlopComponent flipFlop5;
-            JKFlipFlopComponent flipFlop6;
-            JKFlipFlopComponent flipFlop7;
-            JKFlipFlopComponent flipFlop8;
-            JKFlipFlopComponent flipFlop9;
-            JKFlipFlopComponent flipFlop10;
-            JKFlipFlopComponent flipFlop11;
-            JKFlipFlopComponent flipFlop12;
+            Tristate _clock;
+            Tristate _prevClock;
+            uint16_t _count;
     };
 } // nts
