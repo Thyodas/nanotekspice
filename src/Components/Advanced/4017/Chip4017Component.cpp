@@ -17,7 +17,7 @@ nts::Chip4017Component::Chip4017Component()
     _validPins = {Q0, Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9, QB5_9, CP1, CP0, MR};
     _outputPins = {Q0, Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9, QB5_9};
 
-    _computeCacheMap[MR] = True;
+    //_computeCacheMap[MR] = True;
 
     notGateCP1.setLink(NotComponent::Input, *this, CP1);
 
@@ -97,5 +97,5 @@ nts::Chip4017Component::Chip4017Component()
     this->setLink(Q9, norGateQ9, NorComponent::Output);
     this->setLink(QB5_9, flipFlop5, DFlipFlopComponent::OutNQ);
 
-    getLink(Q0);
+    //getLink(Q0);
 }
