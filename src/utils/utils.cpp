@@ -46,7 +46,13 @@ void ntsUtils::parseChipsets(std::ifstream& file, nts::Circuit *circuit)
         results = ntsUtils::split(line, ' ');
         if (results.empty() || results[0][0] == '\n' || results[0][0] == '#')
             continue;
-        if (results[0] == ".links:")
+        std::istringstream iss(results[0]);
+        std::string token2Cleared;
+        std::getline(iss, token2Cleared, '#');
+        token2Cleared = rtrim(token2Cleared);
+        if (token2Cleared.empty())
+            throw nts::Error("nts: Missing links");
+        if (token2Cleared == ".links:")
             break;
         if (results.size() < 2 || results[0].find(":") != std::string::npos || results[1].find(":") != std::string::npos)
             throw nts::Error("nts: Wrong chipset formatting");
