@@ -22,6 +22,15 @@ std::ifstream ntsUtils::openFile(std::string filename)
     return file;
 }
 
+std::string ntsUtils::clearComments(std::string line)
+{
+    std::istringstream iss(line);
+    std::string lineCleared;
+    std::getline(iss, lineCleared, '#');
+    lineCleared = rtrim(lineCleared);
+    return lineCleared;
+}
+
 std::vector<std::string> ntsUtils::split(const std::string& s, char delimiter)
 {
     std::vector<std::string> tokens;
@@ -46,27 +55,35 @@ void ntsUtils::parseChipsets(std::ifstream& file, nts::Circuit *circuit)
         results = ntsUtils::split(line, ' ');
         if (results.empty() || results[0][0] == '\n' || results[0][0] == '#')
             continue;
-        std::istringstream iss(results[0]);
-        std::string token2Cleared;
-        std::getline(iss, token2Cleared, '#');
-        token2Cleared = rtrim(token2Cleared);
+        std::string token2Cleared = clearComments(results[0]);
         if (token2Cleared.empty())
             throw nts::Error("nts: Missing links");
         if (token2Cleared == ".links:")
             break;
         if (results.size() < 2 || results[0].find(":") != std::string::npos || results[1].find(":") != std::string::npos)
             throw nts::Error("nts: Wrong chipset formatting");
-        std::string name = results[1];
-        std::string type = results[0];
-        circuit->addComponent(type, name, &factory);
+        circuit->addComponent(results[0], results[1], &factory);
     }
+}
+
+std::tuple<std::string, std::size_t> ntsUtils::parseLink(std::string result)
+{
+    std::vector<std::string> tokens = ntsUtils::split(result, ':');
+    if (tokens.size() != 2)
+        throw nts::Error("nts: Missing links");
+    std::string name = tokens[0];
+    std::string linkCleared = clearComments(tokens[1]);
+    if (linkCleared.empty())
+        throw nts::Error("nts: Missing links");
+    std::size_t link = std::stoi(linkCleared);
+    return make_tuple(name, link);
 }
 
 void ntsUtils::parseLinks(std::ifstream& file, nts::Circuit *circuit)
 {
     std::string line;
     std::vector<std::string> results;
-    std::vector<std::string> tokens;
+    std::tuple<std::string, std::size_t> tokens;
     while (!file.eof()) {
         std::getline(file, line);
         results = ntsUtils::split(line, ' ');
@@ -74,42 +91,28 @@ void ntsUtils::parseLinks(std::ifstream& file, nts::Circuit *circuit)
             continue;
         if (results.size() < 2)
             throw nts::Error("nts: Wrong chipset formatting");
-        tokens = ntsUtils::split(results[0], ':');
-        if (tokens.size() != 2)
-            throw nts::Error("nts: Missing links");
-        std::string name1 = tokens[0];
-        std::size_t link1 = std::stoi(tokens[1]);
-        tokens = ntsUtils::split(results[1], ':');
-        if (tokens.size() != 2)
-            throw nts::Error("nts: Missing links");
-        std::string name2 = tokens[0];
-        //Remove comment
-        std::istringstream iss(tokens[1]);
-        std::string token2Cleared;
-        std::getline(iss, token2Cleared, '#');
-        token2Cleared = rtrim(token2Cleared);
-        if (token2Cleared.empty())
-            throw nts::Error("nts: Missing links");
-        std::size_t link2 = std::stoi(token2Cleared);
+        tokens = ntsUtils::parseLink(results[0]);
+        std::string name1 = std::get<0>(tokens);
+        std::size_t link1 = std::get<1>(tokens);
+        tokens = ntsUtils::parseLink(results[1]);
+        std::string name2 = std::get<0>(tokens);
+        std::size_t link2 = std::get<1>(tokens);
         circuit->setLinks(name1, link1, name2, link2);
     }
 }
 
 void ntsUtils::parseFile(std::ifstream& file, nts::Circuit *circuit)
 {
-    std::istringstream next;
     std::string line;
     while (!file.eof()) {
         std::getline(file, line);
-        std::istringstream iss(line);
-        std::string lineCleared;
-        std::getline(iss, lineCleared, '#');
+        std::string lineCleared = clearComments(line);
         if (lineCleared == ".chipsets:") {
             parseChipsets(file, circuit);
             parseLinks(file, circuit);
             continue;
         }
-        if (line.size() != 0 && line[0] != '#' && line[0] != '\n')
+        if (lineCleared.size() != 0 && lineCleared[0] != '#' && lineCleared[0] != '\n')
             throw nts::Error("nts: Wrong file formatting");
     }
 }

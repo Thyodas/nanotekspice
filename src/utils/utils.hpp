@@ -14,12 +14,15 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <tuple>
 
 namespace ntsUtils {
     std::ifstream openFile(std::string filename);
     std::vector<std::string> split(const std::string &s, char delimiter);
     void parseChipsets(std::ifstream& file, nts::Circuit *circuit);
+    std::tuple<std::string, std::size_t> parseLink(std::string token);
     void parseLinks(std::ifstream& file, nts::Circuit *circuit);
     void parseFile(std::ifstream& file, nts::Circuit *circuit);
     std::string rtrim(const std::string &s);
+    std::string clearComments(std::string line);
 };
