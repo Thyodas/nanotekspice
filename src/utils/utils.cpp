@@ -6,12 +6,27 @@
 */
 
 #include "utils.hpp"
+#include <algorithm>
+#include <cctype>
+#include <locale>
 
-std::string ntsUtils::rtrim(const std::string &s)
+std::string ntsUtils::rtrim(std::string s)
 {
     const std::string WHITESPACE = " \t\f\v";
     std::size_t end = s.find_last_not_of(WHITESPACE);
     return (end == std::string::npos) ? "" : s.substr(0, end + 1);
+}
+
+std::string ntsUtils::ltrim(std::string s)
+{
+    const std::string WHITESPACE = " \t\f\v";
+    std::size_t begin = s.find_first_not_of(WHITESPACE);
+    return (begin == std::string::npos) ? "" : s.substr(begin, s.length());
+}
+
+std::string ntsUtils::trim(std::string s)
+{
+    return ltrim(rtrim(s));
 }
 
 std::ifstream ntsUtils::openFile(std::string filename)
@@ -27,7 +42,7 @@ std::string ntsUtils::clearComments(std::string line)
     std::istringstream iss(line);
     std::string lineCleared;
     std::getline(iss, lineCleared, '#');
-    lineCleared = rtrim(lineCleared);
+    lineCleared = trim(lineCleared);
     return lineCleared;
 }
 
@@ -37,7 +52,7 @@ std::vector<std::string> ntsUtils::split(const std::string& s, char delimiter)
     std::string token;
     std::istringstream tokenStream(s);
     while (std::getline(tokenStream, token, delimiter)) {
-        token = rtrim(token);
+        token = trim(token);
         if (token == "")
             continue;
         tokens.push_back(token);

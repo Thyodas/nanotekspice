@@ -23,6 +23,8 @@ namespace ntsUtils {
     std::tuple<std::string, std::size_t> parseLink(std::string token);
     void parseLinks(std::ifstream& file, nts::Circuit *circuit);
     void parseFile(std::ifstream& file, nts::Circuit *circuit);
-    std::string rtrim(const std::string &s);
+    std::string rtrim(std::string s);
+    std::string ltrim(std::string s);
+    std::string trim(std::string s);
     std::string clearComments(std::string line);
 };
